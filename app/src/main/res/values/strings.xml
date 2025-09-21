@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Pakopako</string>
+    <string name="message">  Pense à cliquer sur le bouton Enregistre une fois\n le formulaire complété pour bien sauvegarder vos données.</string>
+    <string name="ar">AR</string>
+    <string name="win">Votre solde :</string>
+    <string name="info">©pakopako à Andrainjato organisé par Mr Ricardo</string>
+    <string name="deliver">Vente du jour</string>
+    <string name="andrainjato">Pakopako, le goût d’Andrainjato</string>
+    <string name="slogan">Bienvenue dans notre univers de saveurs !\n Commandez dès maintenant et profitez \nd’un service chaleureux, rapide et délicieux.
+</string>
+
+
+</resources>

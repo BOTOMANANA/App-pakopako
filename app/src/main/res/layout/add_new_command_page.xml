@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".controllers.AddNewCommandPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:elevation="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/top_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            layout="@layout/header_widget"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="36dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            tools:ignore="TextSizeCheck,VisualLintBounds">
+
+            <TextView
+                android:id="@+id/displaySum"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0 "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/text_ariary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" AR"
+                android:alpha="0.3"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                 tools:ignore="HardcodedText,TextContrastCheck" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginBottom="14dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/editPakopko"
+                android:layout_width="300dp"
+                android:layout_height="56dp"
+                android:background="@drawable/edit_text_border"
+                android:drawableEnd="@drawable/custom_icon_pakopako"
+                android:hint=" pakopako"
+                android:inputType="number|numberSigned"
+                android:maxLength="3"
+                android:paddingStart="25sp"
+                android:paddingEnd="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hintEditText"
+                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/editSkewer"
+                android:layout_width="300dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:drawableEnd="@drawable/custom_icon_skewer"
+                android:hint=" Brochettes"
+                android:inputType="number|numberSigned"
+                android:maxLength="3"
+                android:paddingStart="25sp"
+                android:paddingEnd="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hintEditText"
+                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/editChicken"
+                android:layout_width="300dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:drawableEnd="@drawable/custom_icon_chicken"
+                android:hint=" Poulets"
+                android:inputType="number|numberSigned"
+                android:maxLength="2"
+                android:paddingStart="25sp"
+                android:paddingEnd="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hintEditText"
+                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/editJuice"
+                android:layout_width="300dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:drawableEnd="@drawable/custom_icon_juice"
+                android:hint=" Jus"
+                android:inputType="number|numberSigned"
+                android:maxLength="2"
+                android:paddingStart="25sp"
+                android:paddingEnd="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hintEditText"
+                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btn_addData"
+                android:layout_width="164dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="ENREGISTRE"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:letterSpacing="0.05"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.2"
+        android:text="@string/message"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextContrastCheck" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/floatingButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:backgroundTint="@color/colorFloating"-->
+<!--        android:elevation="50dp"-->
+<!--        android:src="@drawable/sack_dollar"-->
+<!--        android:tint="@color/colorSecondary"-->
+<!--        app:elevation="30dp"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />-->
+
+
+    <LinearLayout
+        android:layout_width="154dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/sold_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sack_dollar"
+            android:layout_marginStart="6dp"
+            tools:ignore="ContentDescription,RtlSymmetry" />
+
+        <Button
+            android:id="@+id/floatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="votre solde"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            tools:ignore="HardcodedText,VisualLintBounds" />
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:radius="20dp"
+    app:cardCornerRadius="20dp"
+    android:elevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="Title of message"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/alert_subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="body of the message"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:alpha="0.6"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10sp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/alert_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/whitegray"
+                android:text="Non, garder"
+                android:textSize="12sp"
+                android:textColor="@color/colorPrimary"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+            <Button
+                android:id="@+id/alert_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Oui, effacer"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle,HardcodedText" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

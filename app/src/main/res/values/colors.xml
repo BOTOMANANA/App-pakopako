@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="black2">#212020</color>
+    <color name="hintEditText">#65FFFFFF</color>
+    <color name="hintEditTextColor">#26505050</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#7687E2</color>
+    <color name="colorPrimary">#121310</color>
+    <color name="colorSecondary">#419F58</color>
+    <color name="colorbutton">#3B2A2B26</color>
+    <color name="textColor">#59FFFFFF</color>
+    <color name="whitegray">#1AD9D9D9</color>
+    <color name="colorAccent">#9D419F58</color>
+    <color name="colorFloating">#1C1D1A</color>
+    <color name="colorModification">#9D494949</color>
+
+</resources>

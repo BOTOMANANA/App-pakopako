@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:gravity="top|start"
+    tools:context=".controllers.SplashPage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="256dp"
+        android:layout_height="420dp"
+        android:background="@drawable/splash_effect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="347dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/pakopako_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            tools:ignore="ContentDescription,MissingConstraints,UselessLeaf,VisualLintBounds"
+            tools:layout_editor_absoluteX="-23dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/slogan_linear"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.65"
+        tools:ignore="UselessParent,TextSizeCheck">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/andrainjato"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Chez Ricardo"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAlignment="center"
+            android:alpha="0.4"
+            android:text="@string/slogan"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:ignore="MissingConstraints,TextContrastCheck,VisualLintBounds" />
+
+        <Button
+            android:id="@+id/btn_getStarted"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:letterSpacing="0.02"
+            android:text="Commencer"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
