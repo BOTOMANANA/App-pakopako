@@ -8,6 +8,7 @@ public class Constants {
 	public static final int SKEWER_PRICE = 300;
 	public static final int CHICKEN_PRICE = 1500;
 	public static final int JUICE_PRICE = 500;
+	public static final String TEST_CHANGE = "TEST SUCCESS";
 	public static final String ADD_SUCCESS_TOAST = "Payement est bien enregistrée";
 	public static final String ADD_ERROR = "ERROR TO ADD THE COMMAND SORRY";
 	public static final String ADD_FAILURE = "FAILURE TO ADD THE COMMAND SORRY";
