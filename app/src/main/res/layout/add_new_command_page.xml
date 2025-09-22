@@ -219,7 +219,7 @@
                 android:drawableEnd="@drawable/custom_icon_money"
                 android:hint="Montant client"
                 android:inputType="number|numberSigned"
-                android:maxLength="2"
+                android:maxLength="10"
                 android:paddingStart="25sp"
                 android:paddingEnd="15sp"
                 android:textColor="@color/white"

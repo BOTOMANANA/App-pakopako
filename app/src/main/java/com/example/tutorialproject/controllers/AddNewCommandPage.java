@@ -91,6 +91,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editSkewer.addTextChangedListener(watcher);
 		editChicken.addTextChangedListener(watcher);
 		editJuice.addTextChangedListener(watcher);
+		editMoney.addTextChangedListener(watcher);
 
 		calculate_displaySum();
 
@@ -135,14 +136,18 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 	@SuppressLint("SetTextI18n")
 	private void calculate_displaySum(){
-		int sumAmountCommand = 0, clientAmount = 0;
-		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed, changeAmount;
+		int sumAmountCommand = 0, clientAmount;
+		int changeAmount ;
+		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed, changeAmountFormat;
 
 		sumAmountCommand += getValueFromEditText(editPakopako) * Constants.PAKOPAKO_PRICE;
 		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.SKEWER_PRICE;
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.JUICE_PRICE;
+
 		clientAmount = getValueFromEditText(editMoney);
+		Log.d(Constants.TAG, "clientAmount = " + clientAmount);
+		changeAmount = clientAmount - sumAmountCommand;
 
 
 		 nbrPakopakoDeliver = NumberFormated.formatValue(localDataSource.getTotalNumberPakopako());
@@ -150,7 +155,10 @@ public class AddNewCommandPage extends AppCompatActivity {
 		 nbrChickenDeliver  = NumberFormated.formatValue(localDataSource.getTotalNumberChicken());
 		 nbrJuiceDeliver    = NumberFormated.formatValue(localDataSource.getTotalNumberJuice());
 		 totalSumPayed      = NumberFormated.formatValue(sumAmountCommand);
-		 changeAmount       = NumberFormated.formatValue(clientAmount - sumAmountCommand);
+		 changeAmountFormat = NumberFormated.formatValue(changeAmount);
+
+
+
 
 
 		nbrValuePakopako.setText(nbrPakopakoDeliver);
@@ -158,9 +166,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 		nbrValueChicken.setText(nbrChickenDeliver);
 		nbrValueJuice.setText(nbrJuiceDeliver);
 		amount_command.setText(totalSumPayed);
-		clientBalance.setText(changeAmount);
-
-
+		if(changeAmount < 0){Log.d(Constants.TAG, "error changeAmount = " + changeAmount);}
+		else {clientBalance.setText(changeAmountFormat);}
 	}
 
 	private void addCommandInDatabase(){
