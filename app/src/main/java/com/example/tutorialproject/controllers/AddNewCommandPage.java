@@ -231,6 +231,4 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 	}
 
-
-
 }
