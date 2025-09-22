@@ -44,30 +44,11 @@ public class AddNewCommandPage extends AppCompatActivity {
 		EdgeToEdge.enable(this);
 		setContentView(R.layout.add_new_command_page);
 
+		setupViews();
+
 		localDataSource = new LocalDataSourceImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
 
-
-		amount_command = findViewById(R.id.displaySum);
-		clientBalance  = findViewById(R.id.clientBalance);
-		editPakopako   = findViewById(R.id.editPakopko);
-		editSkewer     = findViewById(R.id.editSkewer);
-		editChicken    = findViewById(R.id.editChicken);
-		editJuice      = findViewById(R.id.editJuice);
-		editMoney      = findViewById(R.id.editMoney);
-
-		nbrValuePakopako = findViewById(R.id.nbrPakopako);
-		nbrValueSkewer   = findViewById(R.id.nbrSkewer);
-		nbrValueChicken  = findViewById(R.id.nbrChicken);
-		nbrValueJuice    = findViewById(R.id.nbrJuice);
-		btn_floating     = findViewById(R.id.floatingButton);
-		btn_addData      = findViewById(R.id.btn_addData);
-		header_widget    = findViewById(R.id.header_widget);
-		text_ariary      = findViewById(R.id.text_ariary);
-
-		YoYo.with(Techniques.RotateInUpRight).duration(1000).playOn(header_widget);
-		YoYo.with(Techniques.RotateIn).duration(1000).playOn(amount_command);
-		YoYo.with(Techniques.FadeIn).duration(5000).playOn(text_ariary);
 
 		TextWatcher watcher = new TextWatcher() {
 			@Override
@@ -217,11 +198,37 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editSkewer.setText("");
 		editChicken.setText("");
 		editJuice.setText("");
+		editMoney.setText("");
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
 	}
 
 	private void createToast(String message){
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	}
+
+	void setupViews(){
+
+		amount_command = findViewById(R.id.displaySum);
+		clientBalance  = findViewById(R.id.clientBalance);
+		editPakopako   = findViewById(R.id.editPakopko);
+		editSkewer     = findViewById(R.id.editSkewer);
+		editChicken    = findViewById(R.id.editChicken);
+		editJuice      = findViewById(R.id.editJuice);
+		editMoney      = findViewById(R.id.editMoney);
+
+		nbrValuePakopako = findViewById(R.id.nbrPakopako);
+		nbrValueSkewer   = findViewById(R.id.nbrSkewer);
+		nbrValueChicken  = findViewById(R.id.nbrChicken);
+		nbrValueJuice    = findViewById(R.id.nbrJuice);
+		btn_floating     = findViewById(R.id.floatingButton);
+		btn_addData      = findViewById(R.id.btn_addData);
+		header_widget    = findViewById(R.id.header_widget);
+		text_ariary      = findViewById(R.id.text_ariary);
+
+		YoYo.with(Techniques.RotateInUpRight).duration(1000).playOn(header_widget);
+		YoYo.with(Techniques.RotateIn).duration(1000).playOn(amount_command);
+		YoYo.with(Techniques.FadeIn).duration(5000).playOn(text_ariary);
+
 	}
 
 
