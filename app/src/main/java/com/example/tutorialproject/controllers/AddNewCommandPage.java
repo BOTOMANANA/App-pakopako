@@ -158,9 +158,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 		 changeAmountFormat = NumberFormated.formatValue(changeAmount);
 
 
-
-
-
 		nbrValuePakopako.setText(nbrPakopakoDeliver);
 		nbrValueSkewer.setText(nbrSkewerDeliver);
 		nbrValueChicken.setText(nbrChickenDeliver);
@@ -214,7 +211,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 				throw new RuntimeException(e);
 
 			}
-
 	}
 	private void cleanAllEditText(){
 		editPakopako.setText("");
@@ -227,9 +223,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 	private void createToast(String message){
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
-
-
-
 
 
 
