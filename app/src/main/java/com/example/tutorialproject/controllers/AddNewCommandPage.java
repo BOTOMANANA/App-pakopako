@@ -29,9 +29,9 @@ import com.example.tutorialproject.utils.NumberFormated;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
-	EditText editPakopako, editSkewer, editChicken, editJuice;
+	EditText editPakopako, editSkewer, editChicken, editJuice, editMoney;
 	LocalDataSourceImpl localDataSource;
-	TextView text_ariary, amount_command, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice;
+	TextView text_ariary, amount_command,clientBalance, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice;
 	Button btn_addData;
 	private long backButtonTime;
 	Button btn_floating;
@@ -49,10 +49,12 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 
 		amount_command = findViewById(R.id.displaySum);
+		clientBalance  = findViewById(R.id.clientBalance);
 		editPakopako   = findViewById(R.id.editPakopko);
 		editSkewer     = findViewById(R.id.editSkewer);
 		editChicken    = findViewById(R.id.editChicken);
 		editJuice      = findViewById(R.id.editJuice);
+		editMoney      = findViewById(R.id.editMoney);
 
 		nbrValuePakopako = findViewById(R.id.nbrPakopako);
 		nbrValueSkewer   = findViewById(R.id.nbrSkewer);
@@ -133,25 +135,30 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 	@SuppressLint("SetTextI18n")
 	private void calculate_displaySum(){
-		int sumAmountCommand = 0;
-		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed;
+		int sumAmountCommand = 0, clientAmount = 0;
+		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed, changeAmount;
 
 		sumAmountCommand += getValueFromEditText(editPakopako) * Constants.PAKOPAKO_PRICE;
 		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.SKEWER_PRICE;
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.JUICE_PRICE;
+		clientAmount = getValueFromEditText(editMoney);
+
 
 		 nbrPakopakoDeliver = NumberFormated.formatValue(localDataSource.getTotalNumberPakopako());
 		 nbrSkewerDeliver   = NumberFormated.formatValue(localDataSource.getTotalNumberSkewer());
 		 nbrChickenDeliver  = NumberFormated.formatValue(localDataSource.getTotalNumberChicken());
 		 nbrJuiceDeliver    = NumberFormated.formatValue(localDataSource.getTotalNumberJuice());
 		 totalSumPayed      = NumberFormated.formatValue(sumAmountCommand);
+		 changeAmount       = NumberFormated.formatValue(clientAmount - sumAmountCommand);
+
 
 		nbrValuePakopako.setText(nbrPakopakoDeliver);
 		nbrValueSkewer.setText(nbrSkewerDeliver);
 		nbrValueChicken.setText(nbrChickenDeliver);
 		nbrValueJuice.setText(nbrJuiceDeliver);
 		amount_command.setText(totalSumPayed);
+		clientBalance.setText(changeAmount);
 
 
 	}
