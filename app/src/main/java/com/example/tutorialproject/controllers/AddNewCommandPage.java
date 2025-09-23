@@ -115,6 +115,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 			return 0;
 		}
 	}
+
 	@SuppressLint("SetTextI18n")
 	private void calculate_displaySum(){
 		int sumAmountCommand = 0, clientAmount;
