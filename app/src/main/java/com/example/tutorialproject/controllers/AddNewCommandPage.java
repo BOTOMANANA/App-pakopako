@@ -82,7 +82,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 		});
 
-//		btn_floating.setImageTintList(ContextCompat.getColorStateList(this, R.color.white));
 		btn_floating.setOnClickListener(v -> biometric.authenticate());
 
 		getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
