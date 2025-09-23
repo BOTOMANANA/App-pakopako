@@ -167,7 +167,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		else if (pakopako >= 70 && pakopako < 80) bonus = 7;
 		else if (pakopako >= 80 && pakopako < 90) bonus = 8;
 		else if (pakopako >= 90 && pakopako < 100) bonus = 9;
-		 else if (pakopako >= 100) bonus = 15;
+		else if (pakopako >= 100) bonus = 15;
 
 
 		String value = "| pakopako:"+ pakopako + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " bonus:" + bonus;
