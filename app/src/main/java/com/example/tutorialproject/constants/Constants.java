@@ -11,7 +11,7 @@ public class Constants {
 	public static final String TEST_CHANGE = "TEST SUCCESS";
 	public static final String TEST_CHANGEs = "TEST de commit in git hub";
 	public static final String ADD_SUCCESS_TOAST = "Payement est bien enregistrée";
-	public static final String ADD_ERROR = "ERROR TO ADD THE COMMAND SORRY";
+	public static final String ADD_ERROR_TOAST = "ERROR TO ADD THE COMMAND SORRY";
 	public static final String ADD_FAILURE = "FAILURE TO ADD THE COMMAND SORRY";
 	public static final String ADD_SUCCESS = "COMMAND ADD SUCCESSFULLY IN DATABASE WITH NUMBER ";
 	public static final String COMMAND_DELETE = "NUMBER OF THE COMMAND TO DELETE: ";

@@ -26,6 +26,7 @@ import com.example.tutorialproject.localData.LocalDataSourceImpl;
 import com.example.tutorialproject.models.Command;
 import com.example.tutorialproject.utils.BiometricAuthenticator;
 import com.example.tutorialproject.utils.NumberFormated;
+import com.example.tutorialproject.utils.ToastMessage;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
@@ -179,7 +180,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 				if (newCommandInsert > 0) {
 					Log.d(Constants.TAG , Constants.ADD_SUCCESS + newCommandInsert + value);
-					createToast(Constants.ADD_SUCCESS_TOAST);
+					ToastMessage.showToast(this, Constants.ADD_SUCCESS_TOAST);
 				}
 				else{
 					Log.d(Constants.TAG, Constants.ADD_FAILURE + newCommandInsert);
@@ -187,8 +188,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 				}
 			}
 			catch (Exception e) {
-				Log.d(Constants.TAG, Constants.ADD_ERROR + e.getMessage());
-				createToast(Constants.ADD_ERROR);
+				Log.d(Constants.TAG, Constants.ADD_ERROR_TOAST + e.getMessage());
+				ToastMessage.showToast(this, Constants.ADD_ERROR_TOAST);
 				throw new RuntimeException(e);
 
 			}
@@ -202,12 +203,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
 	}
 
-	private void createToast(String message){
-		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-	}
-
 	void setupViews(){
-
 		amount_command = findViewById(R.id.displaySum);
 		clientBalance  = findViewById(R.id.clientBalance);
 		editPakopako   = findViewById(R.id.editPakopko);
@@ -228,7 +224,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 		YoYo.with(Techniques.RotateInUpRight).duration(1000).playOn(header_widget);
 		YoYo.with(Techniques.RotateIn).duration(1000).playOn(amount_command);
 		YoYo.with(Techniques.FadeIn).duration(5000).playOn(text_ariary);
-
 	}
 
 }
