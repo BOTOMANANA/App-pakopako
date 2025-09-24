@@ -120,6 +120,22 @@
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <EditText
+                android:id="@+id/editFrenchFries"
+                android:layout_width="310dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edit_text_border"
+                android:drawableStart="@drawable/french_fries"
+                android:hint="  Pomme frite"
+                android:inputType="number|numberSigned"
+                android:maxLength="2"
+                android:paddingStart="12sp"
+                android:paddingEnd="15sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/hintEditText"
+                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            <EditText
                 android:id="@+id/editMoney"
                 android:layout_width="310dp"
                 android:layout_height="56dp"
