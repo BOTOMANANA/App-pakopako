@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="15dp"
-        android:background="@drawable/sold_background"
+        android:background="@drawable/sold_card_corners_background"
         android:gravity="center">
 
         <ImageView
