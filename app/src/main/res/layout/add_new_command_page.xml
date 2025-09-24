@@ -133,38 +133,46 @@
         </LinearLayout>
 
     </ScrollView>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        layout="@layout/footer_widget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <LinearLayout
-        android:layout_width="154dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/sold_background"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+<!--    <LinearLayout-->
+<!--        android:layout_width="154dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:background="@drawable/sold_background"-->
+<!--        android:clickable="true"-->
+<!--        android:focusable="true"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sack_dollar"
-            android:layout_marginStart="6dp"
-            tools:ignore="ContentDescription,RtlSymmetry" />
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/sack_dollar"-->
+<!--            android:layout_marginStart="6dp"-->
+<!--            tools:ignore="ContentDescription,RtlSymmetry" />-->
 
-        <Button
-            android:id="@+id/floatingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:backgroundTint="@android:color/transparent"
-            android:text="votre solde"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            tools:ignore="HardcodedText,VisualLintBounds" />
+<!--        <Button-->
+<!--            android:id="@+id/floatingButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:text="votre solde"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="15sp"-->
+<!--            tools:ignore="HardcodedText,VisualLintBounds" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

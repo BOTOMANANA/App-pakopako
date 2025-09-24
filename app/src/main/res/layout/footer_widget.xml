@@ -11,12 +11,12 @@
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/colorAccent"
+        android:letterSpacing="0.05"
         android:text="ENREGISTRE"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:letterSpacing="0.05"
         android:textStyle="bold"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -34,7 +34,6 @@
             tools:ignore="ContentDescription,RtlSymmetry" />
 
         <Button
-
             android:id="@+id/floatingButton"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
