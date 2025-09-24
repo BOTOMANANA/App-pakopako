@@ -131,4 +131,37 @@
     </LinearLayout>
 
 
+    <!--    chips card here-->
+
+    <LinearLayout
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/rounded_background"
+        android:backgroundTint="@color/colorbutton"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:elevation="10dp"
+        tools:ignore="MissingConstraints,UselessParent">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15sp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/french_fries"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
+
+        <TextView
+            android:id="@+id/frenchFriesPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 000"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+    </LinearLayout>
+
+
 </LinearLayout>
