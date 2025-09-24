@@ -134,10 +134,10 @@
         android:layout_marginStart="16dp"
         android:background="@drawable/rounded_background"
         android:backgroundTint="@color/colorbutton"
+        android:elevation="10dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:elevation="10dp"
-        tools:ignore="MissingConstraints,UselessParent">
+        tools:ignore="MissingConstraints,UselessParent,TextSizeCheck">
 
         <ImageView
             android:layout_width="15dp"
@@ -151,8 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100 000"
-            android:textSize="11sp"
             android:textColor="@color/white"
+            android:textSize="11sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,TextContrastCheck" />
 
