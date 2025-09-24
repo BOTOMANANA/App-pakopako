@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/header_widget"
-    android:layout_height="100dp"
-    >
+    android:layout_height="100dp">
 
 <!--    pakopako card here-->
-
     <LinearLayout
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -39,7 +37,6 @@
     </LinearLayout>
 
 <!--    skewer card here-->
-
     <LinearLayout
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -100,7 +97,6 @@
     </LinearLayout>
 
     <!--    juice card here-->
-
     <LinearLayout
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -131,8 +127,7 @@
     </LinearLayout>
 
 
-    <!--    chips card here-->
-
+    <!--    French fries card here-->
     <LinearLayout
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -162,6 +157,5 @@
             tools:ignore="HardcodedText,TextContrastCheck" />
 
     </LinearLayout>
-
 
 </LinearLayout>

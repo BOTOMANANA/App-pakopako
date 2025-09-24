@@ -75,7 +75,7 @@
                 android:drawableEnd="@drawable/custom_icon_chicken"
                 android:hint=" Poulets"
                 android:inputType="number|numberSigned"
-                android:maxLength="2"
+                android:maxLength="3"
                 android:paddingStart="25sp"
                 android:paddingEnd="15sp"
                 android:textColor="@color/white"
@@ -113,7 +113,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
-
 
         </LinearLayout>
 
