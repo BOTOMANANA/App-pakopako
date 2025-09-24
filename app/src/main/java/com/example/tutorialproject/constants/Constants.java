@@ -1,6 +1,31 @@
 package com.example.tutorialproject.constants;
 
 public class Constants {
+	public static class PriceOfProduct{
+		public static final int PAKOPAKO_SIMPLE_PRICE = 300;
+		public static final int PAKOPAKO_SAUCE_PRICE = 500;
+		public static final int SKEWER_PRICE = 300;
+		public static final int CHICKEN_PRICE = 1500;
+		public static final int JUICE_PRICE = 500;
+
+	}
+
+	public static  class DatabaseMessage{
+		public static final String ADD_SUCCESS_TOAST = "Payement est bien enregistrée";
+		public static final String ADD_ERROR_TOAST = "ERROR TO ADD THE COMMAND SORRY";
+		public static final String ADD_FAILURE = "FAILURE TO ADD THE COMMAND SORRY";
+		public static final String ADD_SUCCESS = "COMMAND ADD SUCCESSFULLY IN DATABASE WITH NUMBER ";
+		public static final String COMMAND_DELETE = "NUMBER OF THE COMMAND TO DELETE: ";
+		public static final String COMMAND_DELETE_NO = "NO COMMAND TO DELETE";
+
+	}
+
+	public static class ErrorMessages{
+		public static final String SUM_ERROR = "ERROR FOR CALCULATE THE SUM OF EITHER COLUMN OF MY DATABASE";
+		public static final String TAG_FORMAT = "DATA_FORMAT";
+		public static final String FORMAT_EXCEPTION = "ERROR OF FORMAT IN INPUT VALUE SORRY ANTONIO";
+	}
+
 	public static final String TAG = "DATABASE_SOURCE";
 	public static final String USER_PASSWORD = "Ricardosam";
 	public static final String TAG_FORMAT = "DATA_FORMAT";
@@ -8,8 +33,6 @@ public class Constants {
 	public static final int SKEWER_PRICE = 300;
 	public static final int CHICKEN_PRICE = 1500;
 	public static final int JUICE_PRICE = 500;
-	public static final String TEST_CHANGE = "TEST SUCCESS";
-	public static final String TEST_CHANGEs = "TEST de commit in git hub";
 	public static final String ADD_SUCCESS_TOAST = "Payement est bien enregistrée";
 	public static final String ADD_ERROR_TOAST = "ERROR TO ADD THE COMMAND SORRY";
 	public static final String ADD_FAILURE = "FAILURE TO ADD THE COMMAND SORRY";
