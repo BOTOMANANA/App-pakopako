@@ -35,64 +35,85 @@
             android:orientation="vertical">
 
 
-            <EditText
-                android:id="@+id/editPakopko"
-                android:layout_width="300dp"
-                android:layout_height="56dp"
-                android:background="@drawable/edit_text_border"
-                android:drawableEnd="@drawable/custom_icon_pakopako"
-                android:hint=" pakopako"
-                android:inputType="number|numberSigned"
-                android:maxLength="3"
-                android:paddingStart="25sp"
-                android:paddingEnd="15sp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/hintEditText"
-                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editPakopko"
+                    android:layout_width="150dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/edit_text_border"
+                    android:drawableStart="@drawable/custom_icon_pakopako"
+                    android:hint="  Simple"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="3"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hintEditText"
+                    tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+                <EditText
+                    android:id="@+id/editPakopkoSauce"
+                    android:layout_width="150dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/edit_text_border"
+                    android:drawableStart="@drawable/custom_icon_pakopako"
+                    android:hint="  Sauce"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="3"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hintEditText"
+                    tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/editSkewer"
-                android:layout_width="300dp"
+                android:layout_width="310dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
-                android:drawableEnd="@drawable/custom_icon_skewer"
-                android:hint=" Brochettes"
+                android:drawableStart="@drawable/custom_icon_skewer"
+                android:hint="  Brochettes"
                 android:inputType="number|numberSigned"
                 android:maxLength="3"
-                android:paddingStart="25sp"
-                android:paddingEnd="15sp"
+                android:paddingStart="12sp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <EditText
                 android:id="@+id/editChicken"
-                android:layout_width="300dp"
+                android:layout_width="310dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
-                android:drawableEnd="@drawable/custom_icon_chicken"
-                android:hint=" Poulets"
+                android:drawableStart="@drawable/custom_icon_chicken"
+                android:hint="  Poulets"
                 android:inputType="number|numberSigned"
                 android:maxLength="3"
-                android:paddingStart="25sp"
-                android:paddingEnd="15sp"
+                android:paddingStart="12sp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <EditText
                 android:id="@+id/editJuice"
-                android:layout_width="300dp"
+                android:layout_width="310dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
-                android:drawableEnd="@drawable/custom_icon_juice"
+                android:drawableStart="@drawable/custom_icon_juice"
                 android:hint=" Jus"
                 android:inputType="number|numberSigned"
                 android:maxLength="2"
-                android:paddingStart="25sp"
+                android:paddingStart="12sp"
                 android:paddingEnd="15sp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
@@ -100,16 +121,15 @@
 
             <EditText
                 android:id="@+id/editMoney"
-                android:layout_width="300dp"
+                android:layout_width="310dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
-                android:drawableEnd="@drawable/custom_icon_money"
-                android:hint="Montant client"
+                android:drawableStart="@drawable/custom_icon_money"
+                android:hint="  Montant client"
                 android:inputType="number|numberSigned"
                 android:maxLength="10"
-                android:paddingStart="25sp"
-                android:paddingEnd="15sp"
+                android:paddingStart="12sp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
