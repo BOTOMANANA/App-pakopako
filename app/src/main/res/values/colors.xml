@@ -5,6 +5,7 @@
     <color name="hintEditText">#65FFFFFF</color>
     <color name="hintEditTextColor">#26505050</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="textColorWhite">#44FFFFFF</color>
     <color name="blue">#7687E2</color>
     <color name="colorPrimary">#121310</color>
     <color name="colorSecondary">#419F58</color>

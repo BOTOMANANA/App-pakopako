@@ -12,7 +12,6 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         layout="@layout/header_menu_widget"/>
 
@@ -20,10 +19,22 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:text="Remboursement du client"
+            android:textColor="@color/textColorWhite"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,MissingConstraints,SmallSp,TextContrastCheck" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:gravity="start"
             android:orientation="horizontal"
@@ -35,7 +46,7 @@
             <TextView
                 android:id="@+id/clientBalance"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="000000"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -47,18 +58,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" AR"
-                android:alpha="0.3"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="15dp"
+            android:text="Le total des achats"
+            android:textColor="@color/textColorWhite"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,MissingConstraints,SmallSp,TextContrastCheck" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +88,6 @@
             android:gravity="end"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints,TextSizeCheck,UselessParent,VisualLintBounds">
-
 
             <TextView
                 android:id="@+id/displaySum"
@@ -87,7 +108,7 @@
                 android:alpha="0.3"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
         </LinearLayout>
