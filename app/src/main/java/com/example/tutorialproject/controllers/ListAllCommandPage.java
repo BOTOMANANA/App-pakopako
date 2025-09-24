@@ -130,13 +130,15 @@ public class ListAllCommandPage extends AppCompatActivity {
 		getNbrJuice.setText(sumNbrJuice);
 		getNbrBonus.setText(sumNbrBonus);
 
-		amountPricePakopako = NumberFormated.formatValue(getSumNbrPakopako * Constants.PAKOPAKO_PRICE);
-		amountPriceSkewer   = NumberFormated.formatValue(getSumNbrSkewer * Constants.SKEWER_PRICE);
-		amountPriceChicken  = NumberFormated.formatValue(getSumNbrChicken * Constants.CHICKEN_PRICE);
-		amountPriceJuice    = NumberFormated.formatValue(getSumNbrJuice * Constants.JUICE_PRICE);
+		amountPricePakopako = NumberFormated.formatValue(getSumNbrPakopako * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE);
+		amountPriceSkewer   = NumberFormated.formatValue(getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE);
+		amountPriceChicken  = NumberFormated.formatValue(getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE);
+		amountPriceJuice    = NumberFormated.formatValue(getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
 
-		sumAllMoneyDaily = (getSumNbrPakopako * Constants.PAKOPAKO_PRICE) + (getSumNbrSkewer * Constants.SKEWER_PRICE) +
-				           (getSumNbrChicken * Constants.CHICKEN_PRICE) + (getSumNbrJuice * Constants.JUICE_PRICE);
+		sumAllMoneyDaily = (getSumNbrPakopako * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
+				             (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
+				             (getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE) +
+				             (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
 
 		if(sumAllMoneyDaily > 0) playAnimationLottie();
 

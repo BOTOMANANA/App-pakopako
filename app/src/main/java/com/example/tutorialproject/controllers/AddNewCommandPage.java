@@ -121,10 +121,10 @@ public class AddNewCommandPage extends AppCompatActivity {
 		int changeAmount ;
 		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed, changeAmountFormat;
 
-		sumAmountCommand += getValueFromEditText(editPakopako) * Constants.PAKOPAKO_PRICE;
-		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.SKEWER_PRICE;
-		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.CHICKEN_PRICE;
-		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.JUICE_PRICE;
+		sumAmountCommand += getValueFromEditText(editPakopako) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
+		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.PriceOfProduct.SKEWER_PRICE;
+		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.PriceOfProduct.CHICKEN_PRICE;
+		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
 
 		clientAmount = getValueFromEditText(editMoney);
 		Log.d(Constants.TAG, "clientAmount = " + clientAmount);

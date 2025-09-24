@@ -20,7 +20,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -44,7 +44,7 @@
                 <EditText
                     android:id="@+id/editPakopko"
                     android:layout_width="150dp"
-                    android:layout_height="56dp"
+                    android:layout_height="54dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
@@ -59,7 +59,7 @@
                 <EditText
                     android:id="@+id/editPakopkoSauce"
                     android:layout_width="150dp"
-                    android:layout_height="56dp"
+                    android:layout_height="54dp"
                     android:layout_marginStart="5dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
@@ -76,7 +76,7 @@
             <EditText
                 android:id="@+id/editSkewer"
                 android:layout_width="310dp"
-                android:layout_height="56dp"
+                android:layout_height="54dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_skewer"
@@ -91,7 +91,7 @@
             <EditText
                 android:id="@+id/editChicken"
                 android:layout_width="310dp"
-                android:layout_height="56dp"
+                android:layout_height="54dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_chicken"
@@ -106,13 +106,13 @@
             <EditText
                 android:id="@+id/editJuice"
                 android:layout_width="310dp"
-                android:layout_height="56dp"
+                android:layout_height="54dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_juice"
                 android:hint=" Jus"
                 android:inputType="number|numberSigned"
-                android:maxLength="2"
+                android:maxLength="3"
                 android:paddingStart="12sp"
                 android:paddingEnd="15sp"
                 android:textColor="@color/white"
@@ -122,7 +122,7 @@
             <EditText
                 android:id="@+id/editFrenchFries"
                 android:layout_width="310dp"
-                android:layout_height="56dp"
+                android:layout_height="54dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/french_fries"
@@ -138,7 +138,7 @@
             <EditText
                 android:id="@+id/editMoney"
                 android:layout_width="310dp"
-                android:layout_height="56dp"
+                android:layout_height="54dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_money"
