@@ -48,7 +48,8 @@
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
-                    android:hint="  Simple"
+                    android:drawablePadding="8dp"
+                    android:hint="Simple"
                     android:inputType="number|numberSigned"
                     android:maxLength="3"
                     android:paddingStart="12sp"
@@ -63,7 +64,8 @@
                     android:layout_marginStart="5dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
-                    android:hint="  Sauce"
+                    android:drawablePadding="8dp"
+                    android:hint="Sauce"
                     android:inputType="number|numberSigned"
                     android:maxLength="3"
                     android:paddingStart="12sp"
@@ -73,6 +75,7 @@
 
             </LinearLayout>
 
+<!--            Skewer                -->
             <EditText
                 android:id="@+id/editSkewer"
                 android:layout_width="310dp"
@@ -80,7 +83,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_skewer"
-                android:hint="  Brochettes"
+                android:drawablePadding="8dp"
+                android:hint="Brochettes"
                 android:inputType="number|numberSigned"
                 android:maxLength="3"
                 android:paddingStart="12sp"
@@ -88,6 +92,7 @@
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
+            <!--            Chicken                -->
             <EditText
                 android:id="@+id/editChicken"
                 android:layout_width="310dp"
@@ -95,7 +100,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_chicken"
-                android:hint="  Poulets"
+                android:drawablePadding="8dp"
+                android:hint="Poulets"
                 android:inputType="number|numberSigned"
                 android:maxLength="3"
                 android:paddingStart="12sp"
@@ -103,6 +109,7 @@
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
+            <!--            Juice                -->
             <EditText
                 android:id="@+id/editJuice"
                 android:layout_width="310dp"
@@ -110,7 +117,8 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_juice"
-                android:hint=" Jus"
+                android:drawablePadding="8dp"
+                android:hint="Jus"
                 android:inputType="number|numberSigned"
                 android:maxLength="3"
                 android:paddingStart="12sp"
@@ -119,21 +127,45 @@
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
-            <EditText
-                android:id="@+id/editFrenchFries"
-                android:layout_width="310dp"
-                android:layout_height="54dp"
+            <!--            French fries        -->
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/edit_text_border"
-                android:drawableStart="@drawable/french_fries"
-                android:hint="  Pomme frite"
-                android:inputType="number|numberSigned"
-                android:maxLength="2"
-                android:paddingStart="12sp"
-                android:paddingEnd="15sp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/hintEditText"
-                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editPFrenchFries"
+                    android:layout_width="150dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/edit_text_border"
+                    android:drawableStart="@drawable/custom_icon_french_fries"
+                    android:drawablePadding="8dp"
+                    android:hint="P frite     ar"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="7"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hintEditText"
+                    tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/edit_text_border"
+                    android:drawableStart="@drawable/french_fries"
+                    android:drawablePadding="8dp"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="3"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hintEditText"
+                    tools:ignore="Autofill,HardcodedText,RtlSymmetry,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/editMoney"
@@ -142,9 +174,10 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_money"
-                android:hint="  Montant client"
+                android:drawablePadding="8dp"
+                android:hint="Montant client                         ar"
                 android:inputType="number|numberSigned"
-                android:maxLength="10"
+                android:maxLength="5"
                 android:paddingStart="12sp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/hintEditText"
