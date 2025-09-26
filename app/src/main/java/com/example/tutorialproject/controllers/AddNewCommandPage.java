@@ -29,7 +29,7 @@ import com.example.tutorialproject.utils.ToastMessage;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
-	EditText editPakopako, editSkewer, editChicken, editJuice, editMoney;
+	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editFrenchFries, editMoney;
 	LocalDataSourceImpl localDataSource;
 	TextView text_ariary, amount_command,clientBalance, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice;
 	Button btn_addData;
@@ -68,7 +68,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 			}
 		};
 
-		editPakopako.addTextChangedListener(watcher);
+		editPakopakoSimple.addTextChangedListener(watcher);
 		editSkewer.addTextChangedListener(watcher);
 		editChicken.addTextChangedListener(watcher);
 		editJuice.addTextChangedListener(watcher);
@@ -121,7 +121,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		int changeAmount ;
 		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, totalSumPayed, changeAmountFormat;
 
-		sumAmountCommand += getValueFromEditText(editPakopako) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
+		sumAmountCommand += getValueFromEditText(editPakopakoSimple) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
 		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.PriceOfProduct.SKEWER_PRICE;
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.PriceOfProduct.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
@@ -131,7 +131,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		changeAmount = clientAmount - sumAmountCommand;
 
 
-		 nbrPakopakoDeliver = NumberFormated.formatValue(localDataSource.getTotalNumberPakopako());
+		 nbrPakopakoDeliver = NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimple());
 		 nbrSkewerDeliver   = NumberFormated.formatValue(localDataSource.getTotalNumberSkewer());
 		 nbrChickenDeliver  = NumberFormated.formatValue(localDataSource.getTotalNumberChicken());
 		 nbrJuiceDeliver    = NumberFormated.formatValue(localDataSource.getTotalNumberJuice());
@@ -151,27 +151,30 @@ public class AddNewCommandPage extends AppCompatActivity {
 	private void addCommandInDatabase(){
 
 		int bonus = 0;
-		int pakopako, skewer, chicken, juice;
-		pakopako = getValueFromEditText(editPakopako);
-		skewer   = getValueFromEditText(editSkewer);
-		chicken  = getValueFromEditText(editChicken);
-		juice    = getValueFromEditText(editJuice);
-
-		 if (pakopako >= 10 && pakopako < 20) bonus = 1;
-		else if (pakopako >= 20 && pakopako < 30) bonus = 2;
-		else if (pakopako >= 30 && pakopako < 40) bonus = 3;
-		else if (pakopako >= 40 && pakopako < 50) bonus = 4;
-		else if (pakopako >= 50 && pakopako < 60) bonus = 5;
-		else if (pakopako >= 60 && pakopako < 70) bonus = 6;
-		else if (pakopako >= 70 && pakopako < 80) bonus = 7;
-		else if (pakopako >= 80 && pakopako < 90) bonus = 8;
-		else if (pakopako >= 90 && pakopako < 100) bonus = 9;
-		else if (pakopako >= 100) bonus = 15;
+		int pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries;
+		pakopakoSimple = getValueFromEditText(editPakopakoSimple);
+		pakopakoSauce  = getValueFromEditText(editPakopakoSauce);
+		skewer         = getValueFromEditText(editSkewer);
+		chicken        = getValueFromEditText(editChicken);
+		juice          = getValueFromEditText(editJuice);
+		frenchFries    = getValueFromEditText(editFrenchFries);
 
 
-		String value = "| pakopako:"+ pakopako + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " bonus:" + bonus;
+		 if (pakopakoSimple >= 10 && pakopakoSimple < 20) bonus = 1;
+		else if (pakopakoSimple >= 20 && pakopakoSimple < 30) bonus = 2;
+		else if (pakopakoSimple >= 30 && pakopakoSimple < 40) bonus = 3;
+		else if (pakopakoSimple >= 40 && pakopakoSimple < 50) bonus = 4;
+		else if (pakopakoSimple >= 50 && pakopakoSimple < 60) bonus = 5;
+		else if (pakopakoSimple >= 60 && pakopakoSimple < 70) bonus = 6;
+		else if (pakopakoSimple >= 70 && pakopakoSimple < 80) bonus = 7;
+		else if (pakopakoSimple >= 80 && pakopakoSimple < 90) bonus = 8;
+		else if (pakopakoSimple >= 90 && pakopakoSimple < 100) bonus = 9;
+		else if (pakopakoSimple >= 100) bonus = 15;
 
-		Command command = new Command(pakopako, skewer, chicken, juice, bonus);
+
+		String value = "| pakopako:"+ pakopakoSimple + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " bonus:" + bonus;
+
+		Command command = new Command(pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries, bonus);
 
 			try {
 				long newCommandInsert = localDataSource.addCommands(command);
@@ -194,7 +197,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 			}
 	}
 	private void cleanAllEditText(){
-		editPakopako.setText("");
+		editPakopakoSimple.setText("");
+		editPakopakoSauce.setText("");
 		editSkewer.setText("");
 		editChicken.setText("");
 		editJuice.setText("");
@@ -203,13 +207,15 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 
 	void setupViews(){
-		amount_command = findViewById(R.id.displaySum);
-		clientBalance  = findViewById(R.id.clientBalance);
-		editPakopako   = findViewById(R.id.editPakopko);
-		editSkewer     = findViewById(R.id.editSkewer);
-		editChicken    = findViewById(R.id.editChicken);
-		editJuice      = findViewById(R.id.editJuice);
-		editMoney      = findViewById(R.id.editMoney);
+		amount_command     = findViewById(R.id.displaySum);
+		clientBalance      = findViewById(R.id.clientBalance);
+		editPakopakoSimple = findViewById(R.id.editPakopkoSimple);
+		editPakopakoSauce  = findViewById(R.id.editPakopkoSauce);
+		editSkewer         = findViewById(R.id.editSkewer);
+		editChicken        = findViewById(R.id.editChicken);
+		editJuice          = findViewById(R.id.editJuice);
+		editFrenchFries    = findViewById(R.id.editPFrenchFries);
+		editMoney          = findViewById(R.id.editMoney);
 
 		nbrValuePakopako = findViewById(R.id.nbrPakopako);
 		nbrValueSkewer   = findViewById(R.id.nbrSkewer);

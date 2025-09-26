@@ -6,25 +6,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SourceDatabase extends SQLiteOpenHelper {
 
-
-	public static final String DATABASE_NAME = "AntMobile3.db";
-	private static final int VERSION = 2;
-	// Creation de la table commands
+	public static final String DATABASE_NAME = "AntMobile9.db";
+	private static final int VERSION = 8;
 	public static final String TABLE_COMMANDS_NAME = "commands";
 	public static final String COLUMN_ID = "id";
-	public static final String COLUMN_NUMBER_PAKOPAKO = "pakopako";
+	public static final String COLUMN_NUMBER_PAKOPAKO_SIMPLE = "pakopakoSimple";
+	public static final String COLUMN_NUMBER_PAKOPAKO_SAUCE = "pakopakoSauce";
 	public static final String COLUMN_NUMBER_SKEWER = "skewer";
 	public static final String COLUMN_NUMBER_CHICKEN = "chicken";
 	public static final String COLUMN_NUMBER_JUICE = "juice";
+	public static final String COLUMN_AMOUNT_FRENCH_FRIES = "french_fries";
 	public static final String COLUMN_NUMBER_BONUS = "bonus";
 
 	private static final String CREATE_TABLE_COMMANDS =
 			  "CREATE TABLE " + TABLE_COMMANDS_NAME + " (" +
 						 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-						 COLUMN_NUMBER_PAKOPAKO + " INTEGER, " +
+						 COLUMN_NUMBER_PAKOPAKO_SIMPLE + " INTEGER, " +
+						 COLUMN_NUMBER_PAKOPAKO_SAUCE + " INTEGER, " +
 						 COLUMN_NUMBER_SKEWER + " INTEGER, " +
 						 COLUMN_NUMBER_CHICKEN+ " INTEGER, " +
 						 COLUMN_NUMBER_JUICE+ " INTEGER," +
+						 COLUMN_AMOUNT_FRENCH_FRIES+ " INTEGER, " +
 						 COLUMN_NUMBER_BONUS + " INTEGER);";
 
 	public SourceDatabase(Context context) {
@@ -39,9 +41,7 @@ public class SourceDatabase extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		if (oldVersion < newVersion) {
-			db.execSQL("ALTER TABLE " + TABLE_COMMANDS_NAME + " ADD COLUMN " + COLUMN_NUMBER_BONUS + "TEXT");
-		}
+
 		db.execSQL(" DROP TABLE IF EXISTS " + TABLE_COMMANDS_NAME);
 		onCreate(db);
 

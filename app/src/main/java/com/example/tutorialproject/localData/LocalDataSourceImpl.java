@@ -26,17 +26,19 @@ public class LocalDataSourceImpl implements LocalDataSource {
 	public long addCommands(Command commands) {
 		openDatabase();
 		ContentValues cv = new ContentValues();
-		cv.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO , commands.getPakopako_number());
+		cv.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SIMPLE , commands.getPakopako_simple_number());
+		cv.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SAUCE, commands.getPakopako_sauce_number());
 		cv.put(SourceDatabase.COLUMN_NUMBER_CHICKEN , commands.getChicken_number());
 		cv.put(SourceDatabase.COLUMN_NUMBER_SKEWER , commands.getSkewer_number());
 		cv.put(SourceDatabase.COLUMN_NUMBER_JUICE , commands.getJuice_number());
+		cv.put(SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES, commands.getFrench_fries_amount());
 		cv.put(SourceDatabase.COLUMN_NUMBER_BONUS, commands.getBonus_number());
 		long newRowCommandId = database.insert(SourceDatabase.TABLE_COMMANDS_NAME ,null, cv);
 		closeDatabase();
 		if(newRowCommandId != -1){
 			Log.d(Constants.TAG, Constants.ADD_SUCCESS + newRowCommandId);
 		}else {
-			Log.d(Constants.TAG, Constants.ADD_FAILURE + newRowCommandId);
+			Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newRowCommandId);
 
 		}
 
@@ -45,18 +47,28 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
 	@SuppressLint("Recycle")
 	@Override
-	public long getTotalNumberPakopako() {return  calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_PAKOPAKO);}
+	public long getTotalNumberPakopakoSimple() {
+		return  calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SIMPLE);
+	}
 	@Override
-	public long getTotalNumberSkewer() { return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_SKEWER); }
+	public long getTotalNumberSkewer() {
+		return calculateEitherNbrProduct( SourceDatabase.COLUMN_NUMBER_SKEWER);
+	}
 	@Override
-	public long getTotalNumberChicken() { return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_CHICKEN); }
+	public long getTotalNumberChicken() {
+		return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_CHICKEN);
+	}
 	@Override
-	public long getTotalNumberJuice() { return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_JUICE); }
+	public long getTotalNumberJuice() {
+		return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_JUICE);
+	}
 	@Override
-	public long getTotalBonus() { return calculateEitherNbrProduct(SourceDatabase.COLUMN_NUMBER_BONUS); }
+	public long getTotalBonus() {
+		return calculateEitherNbrProduct( SourceDatabase.COLUMN_NUMBER_BONUS);
+	}
 
 	@Override
-	public int deleteStoryCommand() {
+	public void deleteStoryCommand() {
 		openDatabase();
 
 		// THIS IS FOR CLEAR ALL THE ROW OF MY TABLE (ALL VALUE FOR COLUMN )
@@ -71,22 +83,21 @@ public class LocalDataSourceImpl implements LocalDataSource {
 			Toast.makeText(context, Constants.NO_DATA_DELETE_TOAST, Toast.LENGTH_SHORT).show();
 		}
 
-		return numberOfDeletedRows;
 	}
 
 
 	@SuppressLint("Recycle")
-	private long calculateEitherNbrProduct(String column_name){
+	private long calculateEitherNbrProduct(String columnName){
 		long nbrProductDeliver = 0;
 		openDatabase();
-		try (Cursor cursor = database.rawQuery("SELECT SUM(" + column_name + ") FROM " + SourceDatabase.TABLE_COMMANDS_NAME, null)) {
+		try (Cursor cursor = database.rawQuery("SELECT SUM(" + columnName + ") FROM " + SourceDatabase.TABLE_COMMANDS_NAME, null)) {
 
 			if (cursor.moveToFirst()) {
 				nbrProductDeliver = cursor.getLong(0);
 			}
 
 		} catch (Exception e) {
-			Log.e(Constants.TAG, Constants.SUM_ERROR + column_name, e);
+			Log.e(Constants.TAG, Constants.SUM_ERROR + columnName, e);
 		} finally {
 			closeDatabase();
 		}

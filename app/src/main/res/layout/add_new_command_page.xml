@@ -42,7 +42,7 @@
                 android:gravity="center">
 
                 <EditText
-                    android:id="@+id/editPakopko"
+                    android:id="@+id/editPakopkoSimple"
                     android:layout_width="150dp"
                     android:layout_height="54dp"
                     android:layout_marginEnd="5dp"

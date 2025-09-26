@@ -29,12 +29,11 @@ import com.example.tutorialproject.utils.CounterNumberAnimation;
 import com.example.tutorialproject.utils.NumberFormated;
 
 public class ListAllCommandPage extends AppCompatActivity {
-	TextView getNbrPakopako, getNbrSkewer, getNbrChicken, getNbrJuice ,getNbrBonus;
-	TextView sumTotalAmountDaily, sumAmountPakopako, sumAmountSkewer, sumAmountChicken, sumAmountJuice;
+	TextView getNbrPakopako, getNbrSkewer, getNbrChicken, getNbrJuice ,getNbrBonus, getNbrSkewerSimba, getNbrPakopakoSimba;
+	TextView sumTotalAmountDaily, sumAmountPakopako, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountOutgo;
 	LocalDataSourceImpl localDataSource;
 	LottieAnimationView animationView;
 	ImageButton btn_goBack;
-
 	Button btn_clearAll;
 	@SuppressLint("UseSwitchCompatOrMaterialCode")
 	 long  TIME_OF_CLEAR = 3000, TIME_ANIMATION = 6000 ;
@@ -47,23 +46,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 		setContentView(R.layout.list_all_command_page);
 		localDataSource = new LocalDataSourceImpl(this);
 
-		btn_goBack     = findViewById(R.id.btn_goBack);
-		btn_clearAll    = findViewById(R.id.btn_cleanData);
-
-		getNbrBonus    = findViewById(R.id.getNbrPakopakoBonus);
-		getNbrPakopako = findViewById(R.id.getNbrPakopako);
-		getNbrSkewer   = findViewById(R.id.getNbrSkewer);
-		getNbrChicken  = findViewById(R.id.getNbrChicken);
-		getNbrJuice    = findViewById(R.id.getNbrJuice);
-
-		sumTotalAmountDaily = findViewById(R.id.sumTotalAmountDaily);
-		sumAmountPakopako   = findViewById(R.id.sumAmountPakopako);
-		sumAmountSkewer     = findViewById(R.id.sumAmountSkewer);
-		sumAmountChicken    = findViewById(R.id.sumAmountChicken);
-		sumAmountJuice      = findViewById(R.id.sumAmountJuice);
-
-
-
+		setupViews();
 		processEitherSumPieces();
 
 		btn_goBack.setOnClickListener(v -> startActivity(new Intent(this, AddNewCommandPage.class)));
@@ -94,7 +77,6 @@ public class ListAllCommandPage extends AppCompatActivity {
 		OnBackPressedCallback callback = new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
-
 			}
 		};
 		getOnBackPressedDispatcher().addCallback(this,callback);
@@ -110,7 +92,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 		String sumNbrPakopako, sumNbrSkewer, sumNbrChicken, sumNbrJuice, sumNbrBonus ;
 		long getSumNbrPakopako , getSumNbrSkewer, getSumNbrChicken, getSumNbrJuice, getSumNbrBonus, sumAllMoneyDaily;
 
-		getSumNbrPakopako = localDataSource.getTotalNumberPakopako();
+		getSumNbrPakopako = localDataSource.getTotalNumberPakopakoSimple();
 		getSumNbrSkewer   = localDataSource.getTotalNumberSkewer();
 		getSumNbrChicken  = localDataSource.getTotalNumberChicken();
 		getSumNbrJuice    = localDataSource.getTotalNumberJuice();
@@ -155,6 +137,27 @@ public class ListAllCommandPage extends AppCompatActivity {
 		animationView.playAnimation();
 		new Handler().postDelayed(() -> runOnUiThread(() -> animationView.setVisibility(GONE)), TIME_ANIMATION);
 
+	}
+
+	private void setupViews(){
+		btn_goBack     = findViewById(R.id.btn_goBack);
+		btn_clearAll    = findViewById(R.id.btn_cleanData);
+
+		getNbrPakopakoSimba = findViewById(R.id.getNbrPakopakoSimba);
+		getNbrSkewerSimba   = findViewById(R.id.getNbrSkewerSimba);
+		getNbrBonus         = findViewById(R.id.getNbrPakopakoBonus);
+		getNbrPakopako      = findViewById(R.id.getNbrPakopako);
+		getNbrSkewer        = findViewById(R.id.getNbrSkewer);
+		getNbrChicken       = findViewById(R.id.getNbrChicken);
+		getNbrJuice         = findViewById(R.id.getNbrJuice);
+
+		sumAmountFrenchFries = findViewById(R.id.sumAmountFrenchFries);
+		sumTotalAmountDaily  = findViewById(R.id.sumTotalAmountDaily);
+		sumAmountPakopako    = findViewById(R.id.sumAmountPakopako);
+		sumAmountSkewer      = findViewById(R.id.sumAmountSkewer);
+		sumAmountChicken     = findViewById(R.id.sumAmountChicken);
+		sumAmountJuice       = findViewById(R.id.sumAmountJuice);
+		sumAmountOutgo       = findViewById(R.id.sumAmountOutgo);
 	}
 
 }

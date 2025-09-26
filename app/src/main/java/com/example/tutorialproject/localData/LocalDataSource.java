@@ -4,16 +4,15 @@ import com.example.tutorialproject.models.Command;
 
 public interface LocalDataSource {
 	long addCommands(Command commands);
-	long getTotalNumberPakopako();
+	long getTotalNumberPakopakoSimple();
 	long getTotalNumberSkewer();
 	long getTotalNumberChicken();
 	long getTotalNumberJuice();
 	long getTotalBonus();
 
-	int deleteStoryCommand();
-
-
-
-
+	void deleteStoryCommand();
+//	long getTotalNumberSkewerSimba();
+//	long getTotalNumberPakopakoSimba();
+//	long getTotalAmountFrenchFries();
 
 }
