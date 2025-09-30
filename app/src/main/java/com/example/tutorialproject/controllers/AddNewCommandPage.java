@@ -41,7 +41,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 	private long backButtonTime;
 	Button btn_floating;
 	LinearLayout header_widget;
-	int NbrBonus = 0;
+	int NbrSimpleBonus, NbrSauceBonus;
+
 	int juiceSelectedValue, frenchFriesSelectedValue;
 
 	@SuppressLint("MissingInflatedId")
@@ -84,6 +85,9 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editJuice.addTextChangedListener(watcher);
 		editFrenchFries.addTextChangedListener(watcher);
 		editMoney.addTextChangedListener(watcher);
+		spinner_juices.setOnItemSelectedListener(spinnerListener);
+		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
+
 
 		calculate_displaySum();
 
@@ -138,6 +142,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.PriceOfProduct.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
 		sumAmountCommand += getValueFromEditText(editFrenchFries);
+		sumAmountCommand += juiceSelectedValue;
+		sumAmountCommand += frenchFriesSelectedValue;
 
 		clientAmount = getValueFromEditText(editMoney);
 		Log.d(Constants.TAG, "clientAmount = " + clientAmount);
@@ -173,11 +179,13 @@ public class AddNewCommandPage extends AppCompatActivity {
 		juice          = getValueFromEditText(editJuice);
 		frenchFries    = getValueFromEditText(editFrenchFries);
 
-		generateBonus(pakopakoSimple, NbrBonus);
+		 NbrSimpleBonus = generateBonus(pakopakoSimple);
+		 NbrSauceBonus = generateBonus(pakopakoSauce);
 
-		String value = "| pakopako:"+ pakopakoSimple + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " bonus:" + NbrBonus;
+		String value = "| pakopako:"+ pakopakoSimple + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " simpleBonus: " + NbrSimpleBonus + " sauceBonus: "  + NbrSauceBonus ;
 
-		Command command = new Command(pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries, NbrBonus, NbrBonus);
+		Log.d(Constants.TAG, value);
+		Command command = new Command(pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries, NbrSimpleBonus, NbrSauceBonus);
 
 			try {
 				long newCommandInsert = localDataSource.addCommands(command);
@@ -240,12 +248,11 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 
 	private void setupSpinnerAdapter(Spinner spinner , int list_data ){
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, list_data, android.R.layout.simple_spinner_item);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, list_data, R.layout.spinner_item_selected_color);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 	}
 
-	private void setSpinnerAdapterViews() {
 
 		AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -253,25 +260,23 @@ public class AddNewCommandPage extends AppCompatActivity {
 				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
 				if(adapterView.getId() == R.id.spinner_juices) {
 					juiceSelectedValue = Integer.parseInt(selectValue);
-					 NumberFormated.formatIntValue(juiceSelectedValue);
 
 				} else if (adapterView.getId() == R.id.spinner_frenchFries) {
 					frenchFriesSelectedValue = Integer.parseInt(selectValue);
 					
 				}
-
+				calculate_displaySum();
 
 			}
-
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 
 			}
 		};
 
-	}
 
-	private void generateBonus(int pakopakoType, int pNbrBonus){
+	private int generateBonus(int pakopakoType){
+		int pNbrBonus = 0;
 
 		if (pakopakoType >= 10 && pakopakoType < 20) pNbrBonus = 1;
 		else if (pakopakoType >= 20 && pakopakoType < 30) pNbrBonus = 2;
@@ -283,8 +288,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		else if (pakopakoType >= 80 && pakopakoType < 90) pNbrBonus = 8;
 		else if (pakopakoType >= 90 && pakopakoType < 100) pNbrBonus = 9;
 		else if (pakopakoType >= 100) pNbrBonus = 15;
+		return pNbrBonus;
 
 	}
 }
-
-// TODO RESOUDRE LE BONUS SUR CHAQUE TYPE DE PAKOPAKO
