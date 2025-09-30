@@ -75,7 +75,7 @@
 
             </LinearLayout>
 
-<!--            Skewer                -->
+            <!--            Skewer                -->
             <EditText
                 android:id="@+id/editSkewer"
                 android:layout_width="310dp"
@@ -93,6 +93,7 @@
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <!--            Chicken                -->
+
             <EditText
                 android:id="@+id/editChicken"
                 android:layout_width="310dp"
@@ -110,24 +111,59 @@
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <!--            Juice                -->
-            <EditText
-                android:id="@+id/editJuice"
-                android:layout_width="310dp"
-                android:layout_height="54dp"
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/edit_text_border"
-                android:drawableStart="@drawable/custom_icon_juice"
-                android:drawablePadding="8dp"
-                android:hint="Jus"
-                android:inputType="number|numberSigned"
-                android:maxLength="3"
-                android:paddingStart="12sp"
-                android:paddingEnd="15sp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/hintEditText"
-                tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editJuice"
+                    android:layout_width="150dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/edit_text_border"
+                    android:drawableStart="@drawable/juice"
+                    android:drawablePadding="8dp"
+                    android:hint="Jus"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="7"
+                    android:paddingStart="12sp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/hintEditText"
+                    tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal"
+                    android:gravity="start|center"
+                    android:background="@drawable/rounded_corners_background"
+                    tools:ignore="UselessLeaf">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/juice"
+                        android:layout_marginStart="12dp"
+                        tools:ignore="ContentDescription" />
+
+                    <Spinner
+                        android:id="@+id/spinner_juices"
+                        android:layout_width="105dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_effect_background"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <!--            French fries        -->
+
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -151,19 +187,30 @@
                     android:textColorHint="@color/hintEditText"
                     tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
-                <EditText
+                <LinearLayout
                     android:layout_width="150dp"
                     android:layout_height="54dp"
                     android:layout_marginStart="5dp"
-                    android:background="@drawable/edit_text_border"
-                    android:drawableStart="@drawable/french_fries"
-                    android:drawablePadding="8dp"
-                    android:inputType="number|numberSigned"
-                    android:maxLength="3"
-                    android:paddingStart="12sp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/hintEditText"
-                    tools:ignore="Autofill,HardcodedText,RtlSymmetry,SpeakableTextPresentCheck" />
+                    android:orientation="horizontal"
+                    android:gravity="start|center"
+                    android:background="@drawable/rounded_corners_background"
+                    tools:ignore="UselessLeaf">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/french_fries"
+                        android:layout_marginStart="12dp"
+                        tools:ignore="ContentDescription" />
+
+                    <Spinner
+                        android:id="@+id/spinner_frenchFries"
+                        android:layout_width="105dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_effect_background"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

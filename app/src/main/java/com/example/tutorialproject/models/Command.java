@@ -5,22 +5,31 @@ public class Command {
 	private int id ;
 	private  int pakopako_simple_number;
 	private  int pakopako_sauce_number;
-	private int skewer_number;//BROCHETTE
-	private int chicken_number; // POULET
+	private int skewer_number;
+	private int chicken_number;
 	private int juice_number;
 	private int french_fries_amount;
-	private int bonus_number;
+	private int pSimpleBonus, pSauceBonus;
 
 
-	public Command(int pakopako_simple_number, int pakopako_sauce_number, int skewer_number, int chicken_number, int juice_number,int french_fries_amount, int bonus_number) {
+	public Command(
+			  int pakopako_simple_number,
+			  int pakopako_sauce_number,
+			  int skewer_number,
+			  int chicken_number,
+			  int juice_number,
+			  int french_fries_amount,
+			  int pSimpleBonus,
+			  int pSauceBonus)
+	{
 		this.pakopako_simple_number = pakopako_simple_number;
 		this.pakopako_sauce_number = pakopako_sauce_number;
 		this.skewer_number = skewer_number;
 		this.chicken_number = chicken_number;
 		this.juice_number = juice_number;
 		this.french_fries_amount = french_fries_amount;
-		this.bonus_number = bonus_number;
-
+		this.pSimpleBonus = pSimpleBonus;
+		this.pSauceBonus  = pSauceBonus;
 	}
 
 	public int getId() {
@@ -48,11 +57,21 @@ public class Command {
 	public void setChicken_number(int chicken_number) {
 		this.chicken_number = chicken_number;
 	}
-	public int getBonus_number() {
-		return bonus_number;
+
+	public int getpSimpleBonus() {
+		return pSimpleBonus;
 	}
-	public void setBonus_number(int bonus_number) {
-		this.bonus_number = bonus_number;
+
+	public void setpSimpleBonus(int pSimpleBonus) {
+		this.pSimpleBonus = pSimpleBonus;
+	}
+
+	public int getpSauceBonus() {
+		return pSauceBonus;
+	}
+
+	public void setpSauceBonus(int pSauceBonus) {
+		this.pSauceBonus = pSauceBonus;
 	}
 
 	public int getPakopako_simple_number() {

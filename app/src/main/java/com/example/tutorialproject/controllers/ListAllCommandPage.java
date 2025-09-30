@@ -29,8 +29,8 @@ import com.example.tutorialproject.utils.CounterNumberAnimation;
 import com.example.tutorialproject.utils.NumberFormated;
 
 public class ListAllCommandPage extends AppCompatActivity {
-	TextView getNbrPakopako, getNbrSkewer, getNbrChicken, getNbrJuice ,getNbrBonus, getNbrSkewerSimba, getNbrPakopakoSimba;
-	TextView sumTotalAmountDaily, sumAmountPakopako, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountOutgo;
+	TextView getNbrPakopakoSimple,getNbrPakopakoSauce, getNbrPSimpleBonus, getNbrPSauceBonus, getNbrSkewer, getNbrChicken, getNbrJuice, getNbrSkewerSimba, getNbrPakopakoSimba;
+	TextView sumTotalAmountDaily, sumAmountPSimple, sumAmountPSauce, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountOutgo;
 	LocalDataSourceImpl localDataSource;
 	LottieAnimationView animationView;
 	ImageButton btn_goBack;
@@ -47,7 +47,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 		localDataSource = new LocalDataSourceImpl(this);
 
 		setupViews();
-		processEitherSumPieces();
+		processEitherSumProduct();
 
 		btn_goBack.setOnClickListener(v -> startActivity(new Intent(this, AddNewCommandPage.class)));
 		btn_clearAll.setOnClickListener(v -> {
@@ -87,47 +87,62 @@ public class ListAllCommandPage extends AppCompatActivity {
 		});
 
 	}
-	private void processEitherSumPieces(){
-		String amountPricePakopako, amountPriceSkewer, amountPriceChicken, amountPriceJuice;
-		String sumNbrPakopako, sumNbrSkewer, sumNbrChicken, sumNbrJuice, sumNbrBonus ;
-		long getSumNbrPakopako , getSumNbrSkewer, getSumNbrChicken, getSumNbrJuice, getSumNbrBonus, sumAllMoneyDaily;
+	private void processEitherSumProduct(){
+		String amountPricePSimple, amountPricePSauce, amountPriceSkewer, amountPriceChicken, amountPriceJuice,amountFrenchFries;
+		String sumNbrPSimple, sumNbrPSauce, sumNbrSkewer, sumNbrChicken, sumNbrJuice, sumNbrPSimpleBonus, sumNbrPSauceBonus ;
+		long getSumNbrPSimple,getSumNbrPSauce, getSumNbrSkewer, getSumNbrChicken, getSumNbrJuice,getAmountFrenchFries, getSumNbrPSimpleBonus,getSumNbrPSauceBonus, sumAllMoneyDaily;
 
-		getSumNbrPakopako = localDataSource.getTotalNumberPakopakoSimple();
-		getSumNbrSkewer   = localDataSource.getTotalNumberSkewer();
-		getSumNbrChicken  = localDataSource.getTotalNumberChicken();
-		getSumNbrJuice    = localDataSource.getTotalNumberJuice();
-		getSumNbrBonus    = localDataSource.getTotalBonus();
+		getSumNbrPSimple      = localDataSource.getTotalNumberPakopakoSimple();
+		getSumNbrPSauce       = localDataSource.getTotalNumberPakopakoSauce();
+		getSumNbrSkewer       = localDataSource.getTotalNumberSkewer();
+		getSumNbrChicken      = localDataSource.getTotalNumberChicken();
+		getSumNbrJuice        = localDataSource.getTotalNumberJuice();
+		getAmountFrenchFries  = localDataSource.getTotalAmountFrenchFries();
+		getSumNbrPSimpleBonus = localDataSource.getTotalNbrPSimpleBonus();
+		getSumNbrPSauceBonus  = localDataSource.getTotalNbrPSauceBonus();
 
-		Log.d(Constants.TAG , "this is sum of the bonus " + getSumNbrBonus);
+		Log.d(Constants.TAG , "this is sum of the bonus " + getSumNbrPSimpleBonus);
 
-		sumNbrPakopako = NumberFormated.formatValue(getSumNbrPakopako);
-		sumNbrSkewer   = NumberFormated.formatValue(getSumNbrSkewer);
-		sumNbrChicken  = NumberFormated.formatValue(getSumNbrChicken);
-		sumNbrJuice    = NumberFormated.formatValue(getSumNbrJuice);
-		sumNbrBonus    = NumberFormated.formatValue(getSumNbrBonus);
+		sumNbrPSimple = NumberFormated.formatValue(getSumNbrPSimple);
+		sumNbrPSauce  = NumberFormated.formatValue(getSumNbrPSauce);
+		sumNbrPSimpleBonus = NumberFormated.formatValue(getSumNbrPSimpleBonus);
+		sumNbrPSauceBonus  = NumberFormated.formatValue(getSumNbrPSauceBonus);
+		sumNbrSkewer  = NumberFormated.formatValue(getSumNbrSkewer);
+		sumNbrChicken = NumberFormated.formatValue(getSumNbrChicken);
+		sumNbrJuice   = NumberFormated.formatValue(getSumNbrJuice);
 
-		getNbrPakopako.setText(sumNbrPakopako);
+
+		getNbrPakopakoSimple.setText(sumNbrPSimple);
+		getNbrPakopakoSauce.setText(sumNbrPSauce);
+		getNbrPSimpleBonus.setText(sumNbrPSimpleBonus);
+		getNbrPSauceBonus.setText(sumNbrPSauceBonus);
 		getNbrSkewer.setText(sumNbrSkewer);
 		getNbrChicken.setText(sumNbrChicken);
 		getNbrJuice.setText(sumNbrJuice);
-		getNbrBonus.setText(sumNbrBonus);
 
-		amountPricePakopako = NumberFormated.formatValue(getSumNbrPakopako * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE);
+
+		amountPricePSimple = NumberFormated.formatValue(getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE);
+		amountPricePSauce  = NumberFormated.formatValue(getSumNbrPSauce * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE);
 		amountPriceSkewer   = NumberFormated.formatValue(getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE);
 		amountPriceChicken  = NumberFormated.formatValue(getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE);
 		amountPriceJuice    = NumberFormated.formatValue(getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
+		amountFrenchFries   = NumberFormated.formatValue(getAmountFrenchFries);
 
-		sumAllMoneyDaily = (getSumNbrPakopako * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
-				             (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
-				             (getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE) +
-				             (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
+		sumAllMoneyDaily = (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
+				  (getSumNbrPSauce * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE) +
+				  (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
+				  (getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE) +
+				  (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
 
 		if(sumAllMoneyDaily > 0) playAnimationLottie();
 
-		sumAmountPakopako.setText(amountPricePakopako);
+		sumAmountPSimple.setText(amountPricePSimple);
+		sumAmountPSauce.setText(amountPricePSauce);
 		sumAmountSkewer.setText(amountPriceSkewer);
 		sumAmountChicken.setText(amountPriceChicken);
 		sumAmountJuice.setText(amountPriceJuice);
+		sumAmountFrenchFries.setText(amountFrenchFries);
+
 		CounterNumberAnimation.counterAnimate(sumTotalAmountDaily ,0 , (int) sumAllMoneyDaily,TIME_COUNTER );
 
 	}
@@ -138,22 +153,24 @@ public class ListAllCommandPage extends AppCompatActivity {
 		new Handler().postDelayed(() -> runOnUiThread(() -> animationView.setVisibility(GONE)), TIME_ANIMATION);
 
 	}
-
 	private void setupViews(){
 		btn_goBack     = findViewById(R.id.btn_goBack);
 		btn_clearAll    = findViewById(R.id.btn_cleanData);
 
-		getNbrPakopakoSimba = findViewById(R.id.getNbrPakopakoSimba);
-		getNbrSkewerSimba   = findViewById(R.id.getNbrSkewerSimba);
-		getNbrBonus         = findViewById(R.id.getNbrPakopakoBonus);
-		getNbrPakopako      = findViewById(R.id.getNbrPakopako);
-		getNbrSkewer        = findViewById(R.id.getNbrSkewer);
-		getNbrChicken       = findViewById(R.id.getNbrChicken);
-		getNbrJuice         = findViewById(R.id.getNbrJuice);
+		getNbrPakopakoSimple = findViewById(R.id.getNbrPakopakoSimple);
+		getNbrPakopakoSauce  = findViewById(R.id.getNbrPakopakoSauce);
+		getNbrPakopakoSimba  = findViewById(R.id.getNbrPakopakoSimba);
+		getNbrSkewerSimba    = findViewById(R.id.getNbrSkewerSimba);
+		getNbrPSimpleBonus   = findViewById(R.id.getNbrPSimpleBonus);
+		getNbrPSauceBonus    = findViewById(R.id.getNbrPSauceBonus);
+		getNbrSkewer         = findViewById(R.id.getNbrSkewer);
+		getNbrChicken        = findViewById(R.id.getNbrChicken);
+		getNbrJuice          = findViewById(R.id.getNbrJuice);
 
+		sumAmountPSimple     = findViewById(R.id.sumAmountPakopakoSimple);
+		sumAmountPSauce      = findViewById(R.id.sumAmountPakopakoSauce);
 		sumAmountFrenchFries = findViewById(R.id.sumAmountFrenchFries);
 		sumTotalAmountDaily  = findViewById(R.id.sumTotalAmountDaily);
-		sumAmountPakopako    = findViewById(R.id.sumAmountPakopako);
 		sumAmountSkewer      = findViewById(R.id.sumAmountSkewer);
 		sumAmountChicken     = findViewById(R.id.sumAmountChicken);
 		sumAmountJuice       = findViewById(R.id.sumAmountJuice);

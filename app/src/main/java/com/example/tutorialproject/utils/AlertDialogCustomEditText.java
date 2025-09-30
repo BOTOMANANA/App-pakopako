@@ -9,9 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.tutorialproject.R;
-
 public class AlertDialogCustomEditText extends Dialog {
-
 	String title;
 	Button btn_affirm, btn_annul;
 	TextView textTitle;

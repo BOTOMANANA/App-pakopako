@@ -14,7 +14,7 @@
         android:gravity="center|top"
         tools:ignore="UselessLeaf">
 
-        <!--    card of the pakopako and display daily sum , amount-->
+        <!--    card of the pakopako simple and display daily sum , amount-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="140dp"
                 android:alpha="0.2"
-                android:text="Pakopako"
+                android:text="Pakopako simple"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -81,7 +81,7 @@
                 tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
 
             <TextView
-                android:id="@+id/getNbrPakopako"
+                android:id="@+id/getNbrPakopakoSimple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -96,7 +96,7 @@
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
             <TextView
-                android:id="@+id/getNbrPakopakoBonus"
+                android:id="@+id/getNbrPSimpleBonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -127,7 +127,7 @@
                 tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
 
             <TextView
-                android:id="@+id/sumAmountPakopako"
+                android:id="@+id/sumAmountPakopakoSimple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="34dp"
@@ -154,6 +154,151 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pieces"
+                app:layout_constraintVertical_bias="0.65"
+                tools:ignore="HardcodedText,SmallSp,SpUsage,TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    card of the pakopako sauce and display daily sum , amount-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rectangle_background"
+            android:elevation="10dp"
+            tools:ignore="TextSizeCheck">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="140dp"
+                android:alpha="0.2"
+                android:text="Pakopako Sauce"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.209"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout0"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout0"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@color/colorbutton"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="center"
+                    android:src="@drawable/pakopako"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/pieces_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.5"
+                android:text="pieces"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.24"
+                tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/getNbrPakopakoSauce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="512"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/pieces_one"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/getNbrPSauceBonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="512"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/pieces_one"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.5"
+                android:text="bonus"
+                android:textAlignment="center"
+                android:textColor="@color/colorSecondary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="HardcodedText,SmallSp,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/sumAmountPakopakoSauce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="34dp"
+                android:text="500 000"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pieces_one"
+                app:layout_constraintVertical_bias="0.7"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16sp"
+                android:alpha="0.5"
+                android:text="AR"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pieces_one"
                 app:layout_constraintVertical_bias="0.65"
                 tools:ignore="HardcodedText,SmallSp,SpUsage,TextContrastCheck" />
 
@@ -600,7 +745,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="140dp"
+                android:layout_marginEnd="135dp"
                 android:alpha="0.2"
                 android:text="Pakopako simba"
                 android:textColor="@color/white"
@@ -631,7 +776,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/french_fries"
+                    android:src="@drawable/pakopako"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
             </LinearLayout>
@@ -681,9 +826,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="140dp"
+                android:layout_marginEnd="135dp"
                 android:alpha="0.2"
-                android:text="Pakopako simba"
+                android:text="Brochettes simba"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -712,7 +857,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/pakopako"
+                    android:src="@drawable/skewer"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
             </LinearLayout>
@@ -794,7 +939,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/pakopako"
+                    android:src="@drawable/depense_icon"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
             </LinearLayout>

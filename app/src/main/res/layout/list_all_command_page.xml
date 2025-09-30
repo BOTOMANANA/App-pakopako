@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.281"
         tools:ignore="UselessLeaf">
 
-        <include layout="@layout/card_name_product" />
+        <include layout="@layout/body_card_name_product" />
 
     </LinearLayout>
 

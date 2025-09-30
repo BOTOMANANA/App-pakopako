@@ -9,5 +9,20 @@
     <string name="slogan">Bienvenue dans notre univers de saveurs !\n Commandez dès maintenant et profitez \nd’un service chaleureux, rapide et délicieux.
 </string>
 
+    <string-array name="JuiceType">
+        <item>Bouteille</item>
+        <item>0.5 Litre</item>
+        <item>1 Litre</item>
+        <item>1.5 Litres</item>
+        <item>2 Litres</item>
+    </string-array>
+
+    <string-array name="frenchFriesType">
+        <item>type</item>
+        <item>1 000</item>
+        <item>2 000</item>
+        <item>3 000</item>
+    </string-array>
+
 
 </resources>
