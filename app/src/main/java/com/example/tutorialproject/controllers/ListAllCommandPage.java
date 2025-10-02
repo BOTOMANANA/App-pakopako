@@ -147,7 +147,6 @@ public class ListAllCommandPage extends AppCompatActivity {
 		getNbrSkewerSimba.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewerSimba()));
 		sumAmountExpense.setText(NumberFormated.formatValue(localDataSource.getSumAmountExpanse()));
 
-
 		CounterNumberAnimation.counterAnimate(sumTotalAmountDaily ,0 , (int) sumAllMoneyDaily,TIME_COUNTER );
 
 	}
