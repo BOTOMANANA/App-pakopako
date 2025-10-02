@@ -21,63 +21,149 @@
             android:id="@+id/alert_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
-            android:text="Title of message"
+            android:text="Produits maratra"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             tools:ignore="HardcodedText,TextContrastCheck" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+<!--        pakopako simba -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            tools:ignore="UselessLeaf">
 
             <EditText
-                android:id="@+id/edit_password"
-                android:layout_width="240dp"
+                android:id="@+id/editPSimba"
+                android:layout_width="160dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/background_edit_product_simba"
+                android:hint="pakopako"
+                android:inputType="number"
+                android:maxLength="3"
+                android:importantForAutofill="no"
+                android:paddingStart="10sp"
+                tools:ignore="HardcodedText,RtlSymmetry,TextFields,TextContrastCheck" />
+
+            <LinearLayout
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_background"
                 android:backgroundTint="@color/colorPrimary"
-                android:drawableStart="@drawable/baseline_lock_open_focus"
-                android:hint=" mot de passe"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:maxLength="16"
-                android:maxLines="1"
-                android:textColorHint="@color/hintEditTextColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="Autofill,HardcodedText,TextFields" />
+                android:gravity="center">
 
-            <ImageButton
-                android:id="@+id/btn_showPassword"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/eye_crossed"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/edit_password"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/nbrPakopakoSimba"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/btnCounterPSimba"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/background_btn_counter_simba"
+                    android:src="@drawable/plus_small"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/btn_register_expense"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+            </LinearLayout>
+
+        </LinearLayout>
+
+<!--        pakopako simba -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            tools:ignore="UselessLeaf">
+
+            <EditText
+                android:id="@+id/editSkewerSimba"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/background_edit_product_simba"
+                android:hint="brochettes"
+                android:inputType="number"
+                android:maxLength="3"
+                android:importantForAutofill="no"
+                android:paddingStart="10sp"
+                tools:ignore="HardcodedText,RtlSymmetry,TextFields,TextContrastCheck" />
+
+            <LinearLayout
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_background"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Sauvergarder"
-                android:textSize="12sp"
-                android:textColor="@color/white"
-                tools:ignore="ButtonStyle,HardcodedText" />
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/nbrSkewerSimba"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    tools:ignore="HardcodedText" />
+
+                <ImageButton
+                    android:id="@+id/btnCounterSkewerSimba"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/background_btn_counter_simba"
+                    android:src="@drawable/plus_small"
+                    tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editExpense"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/background_edit_product_simba"
+            android:hint="Depenses"
+            android:inputType="number"
+            android:maxLength="7"
+            android:importantForAutofill="no"
+            android:paddingStart="10sp"
+            tools:ignore="HardcodedText,RtlSymmetry,TextFields,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btn_register_expense"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:text="Sauvergarder"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="ButtonStyle,HardcodedText,TextContrastCheck" />
 
     </LinearLayout>
 

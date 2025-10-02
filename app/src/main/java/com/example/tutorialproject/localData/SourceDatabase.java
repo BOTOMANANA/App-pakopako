@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SourceDatabase extends SQLiteOpenHelper {
 
-	public static final String DATABASE_NAME = "AntMobile10.db";
-	private static final int VERSION = 9;
+	public static final String DATABASE_NAME = "AntMobile11.db";
+	private static final int VERSION =10;
 	public static final String TABLE_COMMANDS_NAME = "commands";
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_NUMBER_PAKOPAKO_SIMPLE = "pakopakoSimple";
@@ -15,6 +15,7 @@ public class SourceDatabase extends SQLiteOpenHelper {
 	public static final String COLUMN_NUMBER_SKEWER = "skewer";
 	public static final String COLUMN_NUMBER_CHICKEN = "chicken";
 	public static final String COLUMN_NUMBER_JUICE = "juice";
+	public static final String COLUMN_JUICE_BOTTLE_PRICE = "juice_bottle_price";
 	public static final String COLUMN_AMOUNT_FRENCH_FRIES = "french_fries";
 	public static final String COLUMN_NUMBER_PSIMPLE_BONUS = "psimple_bonus";
 	public static final String COLUMN_NUMBER_PSAUCE_BONUS = "psauce_bonus";
@@ -27,6 +28,7 @@ public class SourceDatabase extends SQLiteOpenHelper {
 						 COLUMN_NUMBER_SKEWER + " INTEGER, " +
 						 COLUMN_NUMBER_CHICKEN+ " INTEGER, " +
 						 COLUMN_NUMBER_JUICE+ " INTEGER," +
+						 COLUMN_JUICE_BOTTLE_PRICE+ " INTEGER," +
 						 COLUMN_AMOUNT_FRENCH_FRIES+ " INTEGER, " +
 						 COLUMN_NUMBER_PSIMPLE_BONUS+ " INTEGER, " +
 						 COLUMN_NUMBER_PSAUCE_BONUS + " INTEGER);";
@@ -63,3 +65,4 @@ public class SourceDatabase extends SQLiteOpenHelper {
 
 	}
 }
+

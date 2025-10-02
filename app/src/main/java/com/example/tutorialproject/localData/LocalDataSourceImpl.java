@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.tutorialproject.constants.Constants;
 import com.example.tutorialproject.models.Command;
+import com.example.tutorialproject.models.ProductSimba;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +34,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		cv.put(SourceDatabase.COLUMN_NUMBER_CHICKEN , commands.getChicken_number());
 		cv.put(SourceDatabase.COLUMN_NUMBER_SKEWER , commands.getSkewer_number());
 		cv.put(SourceDatabase.COLUMN_NUMBER_JUICE , commands.getJuice_number());
+		cv.put(SourceDatabase.COLUMN_JUICE_BOTTLE_PRICE , commands.getJuiceBottleLiter());
 		cv.put(SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES, commands.getFrench_fries_amount());
 		cv.put(SourceDatabase.COLUMN_NUMBER_PSIMPLE_BONUS, commands.getpSimpleBonus());
 		cv.put(SourceDatabase.COLUMN_NUMBER_PSAUCE_BONUS, commands.getpSauceBonus());
@@ -45,6 +47,25 @@ public class LocalDataSourceImpl implements LocalDataSource {
 			Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newRowCommandId);
 		}
 		return newRowCommandId;
+	}
+
+	@Override
+	public long insertProductSimba(ProductSimba productSimba) {
+		openDatabase();
+		ContentValues cv = new ContentValues();
+		cv.put(SourceDatabase.COLUMN_PAKOPAKO_SIMBA, productSimba.getPakopakoSimba());
+		cv.put(SourceDatabase.COLUMN_SKEWER_SIMBA, productSimba.getSkewerSimba());
+		cv.put(SourceDatabase.COLUMN_EXPANSE, productSimba.getExpense());
+		long newProductSimba = database.insert(SourceDatabase.TABLE_PRODUCT_SIMBA, null, cv);
+		closeDatabase();
+		if(newProductSimba != -1){
+			Log.d(Constants.TAG, Constants.ADD_SUCCESS + newProductSimba);
+		}
+		else{
+			Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newProductSimba);
+
+		}
+		return newProductSimba;
 	}
 
 	@SuppressLint("Recycle")
@@ -71,6 +92,10 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_NUMBER_JUICE);
 	}
 
+	public long getTotalPriceJuiceBottle() {
+		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_JUICE_BOTTLE_PRICE);
+	}
+
 	@Override
 	public long getTotalAmountFrenchFries() {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES);
@@ -88,11 +113,15 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
 	@Override
 	public long getTotalNumberPakopakoSimba() {
-		return calculateEitherNbrProduct(SourceDatabase.TABLE_PRODUCT_SIMBA, SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SIMPLE);
+		return calculateEitherNbrProduct(SourceDatabase.TABLE_PRODUCT_SIMBA, SourceDatabase.COLUMN_PAKOPAKO_SIMBA);
 	}
 	@Override
 	public long getTotalNumberSkewerSimba() {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_PRODUCT_SIMBA, SourceDatabase.COLUMN_SKEWER_SIMBA);
+	}
+
+	public long getSumAmountExpanse(){
+		return calculateEitherNbrProduct(SourceDatabase.TABLE_PRODUCT_SIMBA, SourceDatabase.COLUMN_EXPANSE);
 	}
 
 	@Override
@@ -100,13 +129,16 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		openDatabase();
 
 		// THIS IS FOR CLEAR ALL THE ROW OF MY TABLE (ALL VALUE FOR COLUMN )
-		int numberOfDeletedRows = database.delete(SourceDatabase.TABLE_COMMANDS_NAME, null, null);
-		closeDatabase();
+		int deleteCommand = database.delete(SourceDatabase.TABLE_COMMANDS_NAME, null, null);
+		int deleteProductSimba = database.delete(SourceDatabase.TABLE_PRODUCT_SIMBA, null, null);
 
-		if (numberOfDeletedRows > 0) {
-			Log.d(Constants.TAG, Constants.COMMAND_DELETE+ numberOfDeletedRows);
+		closeDatabase();
+		int isDelete = deleteCommand + deleteProductSimba;
+		if (isDelete > 0) {
+			Log.d(Constants.TAG, Constants.COMMAND_DELETE + isDelete);
 			Toast.makeText(context, Constants.LOADING_DELETE_TOAST, Toast.LENGTH_SHORT).show();
-		} else {
+		}
+		else {
 			Log.d(Constants.TAG, Constants.COMMAND_DELETE_NO);
 			Toast.makeText(context, Constants.NO_DATA_DELETE_TOAST, Toast.LENGTH_SHORT).show();
 		}

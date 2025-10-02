@@ -10,6 +10,7 @@ public class Command {
 	private int juice_number;
 	private int french_fries_amount;
 	private int pSimpleBonus, pSauceBonus;
+	private int juiceBottleLiter;
 
 
 	public Command(
@@ -18,6 +19,7 @@ public class Command {
 			  int skewer_number,
 			  int chicken_number,
 			  int juice_number,
+			  int juiceBottleLiter,
 			  int french_fries_amount,
 			  int pSimpleBonus,
 			  int pSauceBonus)
@@ -27,6 +29,7 @@ public class Command {
 		this.skewer_number = skewer_number;
 		this.chicken_number = chicken_number;
 		this.juice_number = juice_number;
+		this.juiceBottleLiter = juiceBottleLiter;
 		this.french_fries_amount = french_fries_amount;
 		this.pSimpleBonus = pSimpleBonus;
 		this.pSauceBonus  = pSauceBonus;
@@ -51,6 +54,15 @@ public class Command {
 	public void setJuice_number(int juice_number) {
 		this.juice_number = juice_number;
 	}
+
+	public int getJuiceBottleLiter() {
+		return juiceBottleLiter;
+	}
+
+	public void setJuiceBottleLiter(int juiceBottleLiter) {
+		this.juiceBottleLiter = juiceBottleLiter;
+	}
+
 	public int getChicken_number() {
 		return chicken_number;
 	}

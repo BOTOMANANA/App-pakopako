@@ -34,7 +34,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -93,7 +92,6 @@
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <!--            Chicken                -->
-
             <EditText
                 android:id="@+id/editChicken"
                 android:layout_width="310dp"
@@ -111,7 +109,6 @@
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
             <!--            Juice                -->
-
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -125,7 +122,7 @@
                     android:layout_height="54dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/edit_text_border"
-                    android:drawableStart="@drawable/juice"
+                    android:drawableStart="@drawable/custom_icon_juice"
                     android:drawablePadding="8dp"
                     android:hint="Jus"
                     android:inputType="number|numberSigned"
@@ -145,7 +142,7 @@
                     tools:ignore="UselessLeaf">
 
                     <ImageView
-                        android:layout_width="30dp"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
                         android:src="@drawable/bottle"
                         android:layout_marginStart="12dp"
@@ -163,7 +160,6 @@
             </LinearLayout>
 
             <!--            French fries        -->
-
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -179,7 +175,7 @@
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_french_fries"
                     android:drawablePadding="8dp"
-                    android:hint="P frite     ar"
+                    android:hint="P-frites"
                     android:inputType="number|numberSigned"
                     android:maxLength="7"
                     android:paddingStart="12sp"
@@ -222,7 +218,7 @@
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_money"
                 android:drawablePadding="8dp"
-                android:hint="Montant client                         ar"
+                android:hint="Montant client"
                 android:inputType="number|numberSigned"
                 android:maxLength="5"
                 android:paddingStart="12sp"

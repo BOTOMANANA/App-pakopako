@@ -2,9 +2,12 @@ package com.example.tutorialproject.controllers;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,9 +30,13 @@ import com.example.tutorialproject.R;
 import com.example.tutorialproject.constants.Constants;
 import com.example.tutorialproject.localData.LocalDataSourceImpl;
 import com.example.tutorialproject.models.Command;
+import com.example.tutorialproject.models.ProductSimba;
+import com.example.tutorialproject.utils.AlertDialogCustomExpense;
 import com.example.tutorialproject.utils.BiometricAuthenticator;
 import com.example.tutorialproject.utils.NumberFormated;
 import com.example.tutorialproject.utils.ToastMessage;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
@@ -37,67 +44,45 @@ public class AddNewCommandPage extends AppCompatActivity {
 	Spinner spinner_frenchFries, spinner_juices;
 	LocalDataSourceImpl localDataSource;
 	TextView text_ariary, amount_command,clientBalance, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice, amountFrenchFries;
-	Button btn_addData;
+	Button btn_addData, btn_floating;
 	private long backButtonTime;
-	Button btn_floating;
 	LinearLayout header_widget;
 	int NbrSimpleBonus, NbrSauceBonus;
+	int juiceBottlePrice, frenchFriesSelectedValue;
+	private GestureDetector gestureDetector;
 
-	int juiceSelectedValue, frenchFriesSelectedValue;
-
-	@SuppressLint("MissingInflatedId")
+	@SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		EdgeToEdge.enable(this);
 		setContentView(R.layout.add_new_command_page);
-
 		setupViews();
 		setupSpinnerAdapter(spinner_juices, R.array.JuiceType);
 		setupSpinnerAdapter(spinner_frenchFries, R.array.frenchFriesType);
 
-
 		localDataSource = new LocalDataSourceImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
 
-		TextWatcher watcher = new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				calculate_displaySum();
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-		};
-
-		editPakopakoSimple.addTextChangedListener(watcher);
-		editPakopakoSauce.addTextChangedListener(watcher);
-		editSkewer.addTextChangedListener(watcher);
-		editChicken.addTextChangedListener(watcher);
-		editJuice.addTextChangedListener(watcher);
-		editFrenchFries.addTextChangedListener(watcher);
-		editMoney.addTextChangedListener(watcher);
-		spinner_juices.setOnItemSelectedListener(spinnerListener);
-		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
-
-
-		calculate_displaySum();
+		componentListener();
 
 		btn_addData.setOnClickListener(v -> {
 			addCommandInDatabase();
 			cleanAllEditText();
-
 		});
 
 		btn_floating.setOnClickListener(v -> biometric.authenticate());
+
+		gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+			@Override
+			public void onLongPress(@NotNull MotionEvent event) {
+				showAlertDialogExpense();
+
+			}
+		});
+
+		View rootView = findViewById(android.R.id.content);
+		rootView.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
 
 		getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
@@ -118,6 +103,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 
 	private int getValueFromEditText(EditText userInput){
+
 		String value  = userInput.getText().toString().trim();
 		if(value.isEmpty()) return 0;
 
@@ -129,63 +115,69 @@ public class AddNewCommandPage extends AppCompatActivity {
 			return 0;
 		}
 	}
-
 	@SuppressLint("SetTextI18n")
-	private void calculate_displaySum(){
-		int sumAmountCommand = 0, clientAmount;
-		int changeAmount ;
-		String nbrPakopakoDeliver, nbrSkewerDeliver, nbrChickenDeliver, nbrJuiceDeliver, frenchFriesDeliver, totalSumPayed, changeAmountFormat;
-
+	private int calculateSumAmount() {
+		int sumAmountCommand = 0;
 		sumAmountCommand += getValueFromEditText(editPakopakoSimple) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
 		sumAmountCommand += getValueFromEditText(editPakopakoSauce) * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE;
 		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.PriceOfProduct.SKEWER_PRICE;
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.PriceOfProduct.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
 		sumAmountCommand += getValueFromEditText(editFrenchFries);
-		sumAmountCommand += juiceSelectedValue;
+		sumAmountCommand += juiceBottlePrice;
 		sumAmountCommand += frenchFriesSelectedValue;
-
-		clientAmount = getValueFromEditText(editMoney);
-		Log.d(Constants.TAG, "clientAmount = " + clientAmount);
-		changeAmount = clientAmount - sumAmountCommand;
-
-
-		 nbrPakopakoDeliver = NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimple());
-		 nbrSkewerDeliver   = NumberFormated.formatValue(localDataSource.getTotalNumberSkewer());
-		 nbrChickenDeliver  = NumberFormated.formatValue(localDataSource.getTotalNumberChicken());
-		 nbrJuiceDeliver    = NumberFormated.formatValue(localDataSource.getTotalNumberJuice());
-		 frenchFriesDeliver = NumberFormated.formatValue(localDataSource.getTotalAmountFrenchFries());
-		 totalSumPayed      = NumberFormated.formatValue(sumAmountCommand);
-		 changeAmountFormat = NumberFormated.formatValue(changeAmount);
-
-
-		nbrValuePakopako.setText(nbrPakopakoDeliver);
-		nbrValueSkewer.setText(nbrSkewerDeliver);
-		nbrValueChicken.setText(nbrChickenDeliver);
-		nbrValueJuice.setText(nbrJuiceDeliver);
-		amountFrenchFries.setText(frenchFriesDeliver);
-		amount_command.setText(totalSumPayed);
-		if(changeAmount < 0){Log.d(Constants.TAG, "error changeAmount = " + changeAmount);}
-		else {clientBalance.setText(changeAmountFormat);}
+		return sumAmountCommand;
 	}
+	private void displayProductQtyAndAmount(){
 
+		int clientAmount = getValueFromEditText(editMoney);
+		Log.d(Constants.TAG, "clientAmount = " + clientAmount);
+		int sumAmount = calculateSumAmount();
+		int changeAmount = clientAmount - sumAmount;
+
+		nbrValuePakopako.setText(NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimple()));
+		nbrValueSkewer.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewer()));
+		nbrValueChicken.setText(NumberFormated.formatValue(localDataSource.getTotalNumberChicken()));
+		nbrValueJuice.setText(NumberFormated.formatValue(localDataSource.getTotalNumberJuice()));
+		amountFrenchFries.setText(NumberFormated.formatValue(localDataSource.getTotalAmountFrenchFries()));
+		amount_command.setText(NumberFormated.formatValue(sumAmount));
+
+		if (changeAmount < 0 ) {
+			Log.d(Constants.TAG, "error changeAmount = " + changeAmount);
+		}
+		else {
+			clientBalance.setText(NumberFormated.formatValue(changeAmount));
+		}
+
+	}
 	private void addCommandInDatabase(){
 
-		int pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries;
-		pakopakoSimple = getValueFromEditText(editPakopakoSimple);
-		pakopakoSauce  = getValueFromEditText(editPakopakoSauce);
-		skewer         = getValueFromEditText(editSkewer);
-		chicken        = getValueFromEditText(editChicken);
-		juice          = getValueFromEditText(editJuice);
-		frenchFries    = getValueFromEditText(editFrenchFries);
+		int pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty, fFriesPrice, fFriesQty;
 
-		 NbrSimpleBonus = generateBonus(pakopakoSimple);
-		 NbrSauceBonus = generateBonus(pakopakoSauce);
+		pSimpleQty = getValueFromEditText(editPakopakoSimple);
+		pSauceQty  = getValueFromEditText(editPakopakoSauce);
+		skewerQty  = getValueFromEditText(editSkewer);
+		chickenQty = getValueFromEditText(editChicken);
+		juiceQty   = getValueFromEditText(editJuice);
+		fFriesQty  = getValueFromEditText(editFrenchFries);
 
-		String value = "| pakopako:"+ pakopakoSimple + " skewer:" + skewer + " chicken:" + chicken + " juice:" + juice  + " simpleBonus: " + NbrSimpleBonus + " sauceBonus: "  + NbrSauceBonus ;
+		if(fFriesQty == 0){
+			fFriesPrice = frenchFriesSelectedValue;
+		}
+		else if (frenchFriesSelectedValue == 0) {
+			fFriesPrice = fFriesQty;
+		}
+		else {
+			fFriesPrice = fFriesQty + frenchFriesSelectedValue;
+		}
+
+		NbrSimpleBonus = generateBonus(pSimpleQty);
+		NbrSauceBonus = generateBonus(pSauceQty);
+
+		String value = "| pakopako:"+ pSimpleQty + " skewer:" + skewerQty + " chicken:" + chickenQty + " juice:" + juiceQty  + " simpleBonus: " + NbrSimpleBonus + " sauceBonus: "  + NbrSauceBonus ;
 
 		Log.d(Constants.TAG, value);
-		Command command = new Command(pakopakoSimple, pakopakoSauce, skewer, chicken, juice, frenchFries, NbrSimpleBonus, NbrSauceBonus);
+		Command command = new Command(pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty,juiceBottlePrice, fFriesPrice, NbrSimpleBonus, NbrSauceBonus);
 
 			try {
 				long newCommandInsert = localDataSource.addCommands(command);
@@ -217,7 +209,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editMoney.setText("");
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
 	}
-
 	void setupViews(){
 		amount_command     = findViewById(R.id.displaySum);
 		clientBalance      = findViewById(R.id.clientBalance);
@@ -246,38 +237,13 @@ public class AddNewCommandPage extends AppCompatActivity {
 		YoYo.with(Techniques.RotateIn).duration(1000).playOn(amount_command);
 		YoYo.with(Techniques.FadeIn).duration(5000).playOn(text_ariary);
 	}
-
 	private void setupSpinnerAdapter(Spinner spinner , int list_data ){
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, list_data, R.layout.spinner_item_selected_color);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 	}
-
-
-		AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
-				if(adapterView.getId() == R.id.spinner_juices) {
-					juiceSelectedValue = Integer.parseInt(selectValue);
-
-				} else if (adapterView.getId() == R.id.spinner_frenchFries) {
-					frenchFriesSelectedValue = Integer.parseInt(selectValue);
-					
-				}
-				calculate_displaySum();
-
-			}
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-
-			}
-		};
-
-
 	private int generateBonus(int pakopakoType){
 		int pNbrBonus = 0;
-
 		if (pakopakoType >= 10 && pakopakoType < 20) pNbrBonus = 1;
 		else if (pakopakoType >= 20 && pakopakoType < 30) pNbrBonus = 2;
 		else if (pakopakoType >= 30 && pakopakoType < 40) pNbrBonus = 3;
@@ -289,6 +255,129 @@ public class AddNewCommandPage extends AppCompatActivity {
 		else if (pakopakoType >= 90 && pakopakoType < 100) pNbrBonus = 9;
 		else if (pakopakoType >= 100) pNbrBonus = 15;
 		return pNbrBonus;
+	}
+	private void componentListener() {
+
+		TextWatcher watcher = new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {displayProductQtyAndAmount();}
+			@Override
+			public void afterTextChanged(Editable s) {}
+		};
+
+		AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
+
+				if(adapterView.getId() == R.id.spinner_juices) {
+					float juiceLiterSelected = Float.parseFloat(selectValue);
+					if (juiceLiterSelected ==1) {
+						juiceBottlePrice = 2000;
+					}
+					else if (juiceLiterSelected == 1.5) {
+						juiceBottlePrice = 3000;
+					}
+					else if(juiceLiterSelected ==2.5){
+						juiceBottlePrice = 4000;
+					}
+				}
+				else if (adapterView.getId() == R.id.spinner_frenchFries) {
+					frenchFriesSelectedValue = Integer.parseInt(selectValue);
+				}
+				displayProductQtyAndAmount();
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {}
+		};
+
+		editPakopakoSimple.addTextChangedListener(watcher);
+		editPakopakoSauce.addTextChangedListener(watcher);
+		editSkewer.addTextChangedListener(watcher);
+		editChicken.addTextChangedListener(watcher);
+		editJuice.addTextChangedListener(watcher);
+		editFrenchFries.addTextChangedListener(watcher);
+		editMoney.addTextChangedListener(watcher);
+		spinner_juices.setOnItemSelectedListener(spinnerListener);
+		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
+		displayProductQtyAndAmount();
 
 	}
+	private void showAlertDialogExpense(){
+		AlertDialogCustomExpense dialog = new AlertDialogCustomExpense(this);
+
+		// Compteurs pour les boutons
+		final int[] counterPSimba = {0};
+		final int[] counterSSimba = {0};
+
+		String nbrPSimba, nbrSSimba;
+
+		nbrPSimba = String.valueOf(localDataSource.getTotalNumberPakopakoSimba());
+		nbrSSimba = String.valueOf(localDataSource.getTotalNumberSkewerSimba());
+
+		dialog.getDisplayNbrPSimba().setText(nbrPSimba);
+		dialog.getDisplayNbrSSimba().setText(nbrSSimba);
+
+		dialog.getBtnPSimbaCounter().setOnClickListener(v -> {
+			counterPSimba[0] ++;
+			dialog.getEditNbrPSimba().setText(String.valueOf(counterPSimba[0]));
+			dialog.getDisplayNbrPSimba().setText(String.valueOf(counterPSimba[0]));
+
+		});
+
+		dialog.getBtnSSimbaCounter().setOnClickListener(v -> {
+			counterSSimba[0] ++;
+			dialog.getEditNbrSSimba().setText(String.valueOf(counterSSimba[0]));
+			dialog.getDisplayNbrSSimba().setText(String.valueOf(counterSSimba[0]));
+
+		});
+
+		dialog.getBtnRegister().setOnClickListener(v -> {
+			int NbrPakopakoSimba, NbrSkewerSimba, expenseValue;
+
+			String editPakopakoSimba = dialog.getEditNbrPSimba().getText().toString().trim();
+
+			if (editPakopakoSimba.isEmpty()) {
+				NbrPakopakoSimba = counterPSimba[0];
+			}
+			else {
+				NbrPakopakoSimba = Integer.parseInt(editPakopakoSimba);
+			}
+
+			String editSkewerSimba = dialog.getEditNbrSSimba().getText().toString().trim();
+			if (editSkewerSimba.isEmpty()) {
+				NbrSkewerSimba = counterSSimba[0];
+			}
+			else {
+				NbrSkewerSimba = Integer.parseInt(editSkewerSimba);
+			}
+
+			 String editExpenseValue = dialog.getEditExpense().getText().toString().trim();
+			 expenseValue = editExpenseValue.isEmpty() ? 0 : Integer.parseInt(editExpenseValue);
+
+			ProductSimba productSimba = new ProductSimba(NbrPakopakoSimba, NbrSkewerSimba, expenseValue);
+			 long isSuccess = localDataSource.insertProductSimba(productSimba);
+
+			if(isSuccess != -1){
+				dialog.getDisplayNbrPSimba().setText(nbrPSimba);
+				dialog.getDisplayNbrSSimba().setText(nbrSSimba);
+				Log.d(Constants.ADD_SUCCESS, "Enregistrement avec success" + isSuccess);
+
+			}
+			else {
+				Log.d(Constants.ADD_SUCCESS, "Enregistrement avec Erreur" + isSuccess);
+			}
+			new Handler().postDelayed(dialog::dismiss,800);
+
+		});
+		dialog.show();
+		dialog.setCanceledOnTouchOutside(true);
+
+	}
+
+
+
+
 }

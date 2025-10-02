@@ -30,7 +30,7 @@ import com.example.tutorialproject.utils.NumberFormated;
 
 public class ListAllCommandPage extends AppCompatActivity {
 	TextView getNbrPakopakoSimple,getNbrPakopakoSauce, getNbrPSimpleBonus, getNbrPSauceBonus, getNbrSkewer, getNbrChicken, getNbrJuice, getNbrSkewerSimba, getNbrPakopakoSimba;
-	TextView sumTotalAmountDaily, sumAmountPSimple, sumAmountPSauce, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountOutgo;
+	TextView sumTotalAmountDaily, sumAmountPSimple, sumAmountPSauce, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountExpense;
 	LocalDataSourceImpl localDataSource;
 	LottieAnimationView animationView;
 	ImageButton btn_goBack;
@@ -128,6 +128,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 		amountPriceJuice    = NumberFormated.formatValue(getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
 		amountFrenchFries   = NumberFormated.formatValue(getAmountFrenchFries);
 
+
 		sumAllMoneyDaily = (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
 				  (getSumNbrPSauce * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE) +
 				  (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
@@ -142,6 +143,10 @@ public class ListAllCommandPage extends AppCompatActivity {
 		sumAmountChicken.setText(amountPriceChicken);
 		sumAmountJuice.setText(amountPriceJuice);
 		sumAmountFrenchFries.setText(amountFrenchFries);
+		getNbrPakopakoSimba.setText(NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimba()));
+		getNbrSkewerSimba.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewerSimba()));
+		sumAmountExpense.setText(NumberFormated.formatValue(localDataSource.getSumAmountExpanse()));
+
 
 		CounterNumberAnimation.counterAnimate(sumTotalAmountDaily ,0 , (int) sumAllMoneyDaily,TIME_COUNTER );
 
@@ -174,7 +179,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 		sumAmountSkewer      = findViewById(R.id.sumAmountSkewer);
 		sumAmountChicken     = findViewById(R.id.sumAmountChicken);
 		sumAmountJuice       = findViewById(R.id.sumAmountJuice);
-		sumAmountOutgo       = findViewById(R.id.sumAmountOutgo);
+		sumAmountExpense     = findViewById(R.id.sumAmountOutgo);
 	}
 
 }
