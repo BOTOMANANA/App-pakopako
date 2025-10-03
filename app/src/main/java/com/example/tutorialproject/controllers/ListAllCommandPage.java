@@ -129,11 +129,12 @@ public class ListAllCommandPage extends AppCompatActivity {
 		amountFrenchFries   = NumberFormated.formatValue(getAmountFrenchFries);
 
 
-		sumAllMoneyDaily = (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
+		sumAllMoneyDaily =( (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
 				  (getSumNbrPSauce * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE) +
 				  (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
 				  (getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE) +
-				  (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE);
+				  (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE)) - localDataSource.getSumAmountExpanse();
+
 
 		if(sumAllMoneyDaily > 0) playAnimationLottie();
 
