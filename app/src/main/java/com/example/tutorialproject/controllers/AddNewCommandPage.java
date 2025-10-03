@@ -1,5 +1,8 @@
 package com.example.tutorialproject.controllers;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
-	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editFrenchFries, editMoney;
+	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editFrenchFries, editMoney, editQuantityFFries;
 	Spinner spinner_frenchFries, spinner_juices;
 	LocalDataSourceImpl localDataSource;
 	TextView text_ariary, amount_command,clientBalance, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice, amountFrenchFries;
@@ -48,8 +51,9 @@ public class AddNewCommandPage extends AppCompatActivity {
 	private long backButtonTime;
 	LinearLayout header_widget;
 	int NbrSimpleBonus, NbrSauceBonus;
-	int juiceBottlePrice, frenchFriesSelectedValue;
+	int juiceBottlePrice, frenchFriesSelectedValue, displayTotalFFries;
 	private GestureDetector gestureDetector;
+	private boolean isFirstSelection = true;
 
 	@SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
 	@Override
@@ -60,15 +64,19 @@ public class AddNewCommandPage extends AppCompatActivity {
 		setupViews();
 		setupSpinnerAdapter(spinner_juices, R.array.JuiceType);
 		setupSpinnerAdapter(spinner_frenchFries, R.array.frenchFriesType);
+		editFrenchFries.setVisibility(View.VISIBLE);
 
 		localDataSource = new LocalDataSourceImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
+
+		int multiplyQuantity = getValueFromEditText(editQuantityFFries);
 
 		componentListener();
 
 		btn_addData.setOnClickListener(v -> {
 			addCommandInDatabase();
 			cleanAllEditText();
+			editQuantityFFries.setVisibility(GONE);
 		});
 
 		btn_floating.setOnClickListener(v -> biometric.authenticate());
@@ -117,6 +125,15 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 	@SuppressLint("SetTextI18n")
 	private int calculateSumAmount() {
+		int multiplyQuantity = 0;
+		String editQuantityValue = editQuantityFFries.getText().toString().trim();
+		if(editQuantityValue.isEmpty()){
+			 multiplyQuantity= 1;
+		}else {
+			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
+		}
+
+
 		int sumAmountCommand = 0;
 		sumAmountCommand += getValueFromEditText(editPakopakoSimple) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
 		sumAmountCommand += getValueFromEditText(editPakopakoSauce) * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE;
@@ -125,7 +142,8 @@ public class AddNewCommandPage extends AppCompatActivity {
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
 		sumAmountCommand += getValueFromEditText(editFrenchFries);
 		sumAmountCommand += juiceBottlePrice;
-		sumAmountCommand += frenchFriesSelectedValue;
+		sumAmountCommand += frenchFriesSelectedValue * multiplyQuantity;
+//		sumAmountCommand += displayTotalFFries;
 		return sumAmountCommand;
 	}
 	private void displayProductQtyAndAmount(){
@@ -161,14 +179,23 @@ public class AddNewCommandPage extends AppCompatActivity {
 		juiceQty   = getValueFromEditText(editJuice);
 		fFriesQty  = getValueFromEditText(editFrenchFries);
 
+		 int multiplyQuantity = 0;
+		 String editQuantityValue = editQuantityFFries.getText().toString().trim();
+		 if(editQuantityValue.isEmpty()){
+			  multiplyQuantity= 1;
+		 }else {
+			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
+		 }
+
+
 		if(fFriesQty == 0){
-			fFriesPrice = frenchFriesSelectedValue;
+			fFriesPrice = frenchFriesSelectedValue * multiplyQuantity;
 		}
 		else if (frenchFriesSelectedValue == 0) {
 			fFriesPrice = fFriesQty;
 		}
 		else {
-			fFriesPrice = fFriesQty + frenchFriesSelectedValue;
+			fFriesPrice = fFriesQty + (frenchFriesSelectedValue * multiplyQuantity);
 		}
 
 		NbrSimpleBonus = generateBonus(pSimpleQty);
@@ -200,6 +227,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 			}
 	}
 	private void cleanAllEditText(){
+		editFrenchFries.setVisibility(VISIBLE);
 		editPakopakoSimple.setText("");
 		editPakopakoSauce.setText("");
 		editSkewer.setText("");
@@ -207,6 +235,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editJuice.setText("");
 		editFrenchFries.setText("");
 		editMoney.setText("");
+		editQuantityFFries.setText("");
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
 	}
 	void setupViews(){
@@ -219,6 +248,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editJuice          = findViewById(R.id.editJuice);
 		editFrenchFries    = findViewById(R.id.editPFrenchFries);
 		editMoney          = findViewById(R.id.editMoney);
+		editQuantityFFries = findViewById(R.id.editQuantityFFries);
 
 		spinner_juices      = findViewById(R.id.spinner_juices);
 		spinner_frenchFries = findViewById(R.id.spinner_frenchFries);
@@ -273,24 +303,41 @@ public class AddNewCommandPage extends AppCompatActivity {
 				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
 
 				if(adapterView.getId() == R.id.spinner_juices) {
+
+
 					float juiceLiterSelected = Float.parseFloat(selectValue);
 					if (juiceLiterSelected ==1) {
-						juiceBottlePrice = 2000;
-					}
-					else if (juiceLiterSelected == 1.5) {
 						juiceBottlePrice = 3000;
 					}
-					else if(juiceLiterSelected ==2.5){
-						juiceBottlePrice = 4000;
+					else if (juiceLiterSelected == 1.5) {
+						juiceBottlePrice = 5000;
+					}
+					else if(juiceLiterSelected ==2){
+						juiceBottlePrice = 6000;
 					}
 				}
+
 				else if (adapterView.getId() == R.id.spinner_frenchFries) {
+					if (isFirstSelection) {
+						isFirstSelection = false;
+						return;
+					}
+
+					editFrenchFries.setVisibility(View.GONE);
+					editQuantityFFries.setVisibility(View.VISIBLE);
+					editFrenchFries.setVisibility(GONE);
+
 					frenchFriesSelectedValue = Integer.parseInt(selectValue);
+					editQuantityFFries.setVisibility(VISIBLE);
+
 				}
 				displayProductQtyAndAmount();
 			}
 			@Override
-			public void onNothingSelected(AdapterView<?> parent) {}
+			public void onNothingSelected(AdapterView<?> parent) {
+				editFrenchFries.setVisibility(View.VISIBLE);
+				editQuantityFFries.setVisibility(View.GONE);
+			}
 		};
 
 		editPakopakoSimple.addTextChangedListener(watcher);
@@ -300,8 +347,11 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editJuice.addTextChangedListener(watcher);
 		editFrenchFries.addTextChangedListener(watcher);
 		editMoney.addTextChangedListener(watcher);
+		editQuantityFFries.addTextChangedListener(watcher);
+
 		spinner_juices.setOnItemSelectedListener(spinnerListener);
 		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
+
 		displayProductQtyAndAmount();
 
 	}
