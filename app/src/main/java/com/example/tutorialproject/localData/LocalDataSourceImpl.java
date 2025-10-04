@@ -36,6 +36,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		cv.put(SourceDatabase.COLUMN_NUMBER_JUICE , commands.getJuice_number());
 		cv.put(SourceDatabase.COLUMN_JUICE_BOTTLE_PRICE , commands.getJuiceBottleLiter());
 		cv.put(SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES, commands.getFrench_fries_amount());
+		cv.put(SourceDatabase.COLUMN_AMOUNT_OTHER, commands.getOther_amount());
 		cv.put(SourceDatabase.COLUMN_NUMBER_PSIMPLE_BONUS, commands.getpSimpleBonus());
 		cv.put(SourceDatabase.COLUMN_NUMBER_PSAUCE_BONUS, commands.getpSauceBonus());
 		long newRowCommandId = database.insert(SourceDatabase.TABLE_COMMANDS_NAME ,null, cv);
@@ -101,6 +102,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES);
 	}
 
+
 	@Override
 	public long getTotalNbrPSimpleBonus() {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_NUMBER_PSIMPLE_BONUS);
@@ -118,6 +120,10 @@ public class LocalDataSourceImpl implements LocalDataSource {
 	@Override
 	public long getTotalNumberSkewerSimba() {
 		return calculateEitherNbrProduct(SourceDatabase.TABLE_PRODUCT_SIMBA, SourceDatabase.COLUMN_SKEWER_SIMBA);
+	}
+	@Override
+	public long getTotalAmountOther() {
+		return calculateEitherNbrProduct(SourceDatabase.TABLE_COMMANDS_NAME, SourceDatabase.COLUMN_AMOUNT_OTHER);
 	}
 
 	public long getSumAmountExpanse(){
@@ -169,5 +175,3 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
 }
 
-//TODO ajout une paramettre sur sur ma model command , ajout une column sur ma table command , recuperation de bonus et affichage
-//TODO creation d'une autre model qui va regler le probleme de depenser et erreur , ensuite creation d'une table dans ma base de donnee

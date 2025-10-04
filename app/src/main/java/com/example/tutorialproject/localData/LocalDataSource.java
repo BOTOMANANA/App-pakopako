@@ -14,6 +14,7 @@ public interface LocalDataSource {
 	long getTotalNumberChicken();
 	long getTotalNumberJuice();
 	long getTotalAmountFrenchFries();
+	long getTotalAmountOther();
 	long getTotalNbrPSimpleBonus();
 	long getTotalNbrPSauceBonus();
 

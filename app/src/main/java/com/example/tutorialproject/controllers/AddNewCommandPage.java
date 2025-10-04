@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class AddNewCommandPage extends AppCompatActivity {
-	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editFrenchFries, editMoney, editQuantityFFries;
+	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editOther, editMoney, editQuantityFFries;
 	Spinner spinner_frenchFries, spinner_juices;
 	LocalDataSourceImpl localDataSource;
 	TextView text_ariary, amount_command,clientBalance, nbrValuePakopako, nbrValueSkewer, nbrValueChicken, nbrValueJuice, amountFrenchFries;
@@ -64,12 +64,12 @@ public class AddNewCommandPage extends AppCompatActivity {
 		setupViews();
 		setupSpinnerAdapter(spinner_juices, R.array.JuiceType);
 		setupSpinnerAdapter(spinner_frenchFries, R.array.frenchFriesType);
-		editFrenchFries.setVisibility(View.VISIBLE);
+		editOther.setVisibility(View.VISIBLE);
 
 		localDataSource = new LocalDataSourceImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
 
-		int multiplyQuantity = getValueFromEditText(editQuantityFFries);
+//		int multiplyQuantity = getValueFromEditText(editQuantityFFries);
 
 		componentListener();
 
@@ -125,13 +125,14 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 	@SuppressLint("SetTextI18n")
 	private int calculateSumAmount() {
-		int multiplyQuantity = 0;
+		int multiplyQuantity ;
 		String editQuantityValue = editQuantityFFries.getText().toString().trim();
 		if(editQuantityValue.isEmpty()){
 			 multiplyQuantity= 1;
 		}else {
 			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
 		}
+		displayTotalFFries += frenchFriesSelectedValue * multiplyQuantity;
 
 
 		int sumAmountCommand = 0;
@@ -140,28 +141,26 @@ public class AddNewCommandPage extends AppCompatActivity {
 		sumAmountCommand += getValueFromEditText(editSkewer)   * Constants.PriceOfProduct.SKEWER_PRICE;
 		sumAmountCommand += getValueFromEditText(editChicken)  * Constants.PriceOfProduct.CHICKEN_PRICE;
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
-		sumAmountCommand += getValueFromEditText(editFrenchFries);
+		sumAmountCommand += getValueFromEditText(editOther);
 		sumAmountCommand += juiceBottlePrice;
-		sumAmountCommand += frenchFriesSelectedValue * multiplyQuantity;
-//		sumAmountCommand += displayTotalFFries;
+		sumAmountCommand += displayTotalFFries;
 		return sumAmountCommand;
 	}
+	@SuppressLint("SetTextI18n")
 	private void displayProductQtyAndAmount(){
-
 		int clientAmount = getValueFromEditText(editMoney);
-		Log.d(Constants.TAG, "clientAmount = " + clientAmount);
 		int sumAmount = calculateSumAmount();
 		int changeAmount = clientAmount - sumAmount;
 
-		nbrValuePakopako.setText(NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimple()));
+		nbrValuePakopako.setText(NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimple() + localDataSource.getTotalNumberPakopakoSauce()));
 		nbrValueSkewer.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewer()));
 		nbrValueChicken.setText(NumberFormated.formatValue(localDataSource.getTotalNumberChicken()));
 		nbrValueJuice.setText(NumberFormated.formatValue(localDataSource.getTotalNumberJuice()));
 		amountFrenchFries.setText(NumberFormated.formatValue(localDataSource.getTotalAmountFrenchFries()));
 		amount_command.setText(NumberFormated.formatValue(sumAmount));
 
-		if (changeAmount < 0 ) {
-			Log.d(Constants.TAG, "error changeAmount = " + changeAmount);
+		if (clientAmount < sumAmount || changeAmount < 0) {
+			clientBalance.setText("erreur");
 		}
 		else {
 			clientBalance.setText(NumberFormated.formatValue(changeAmount));
@@ -169,34 +168,24 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 	}
 	private void addCommandInDatabase(){
-
-		int pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty, fFriesPrice, fFriesQty;
+		int pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty, fFriesPrice, otherAmount, multiplyQuantity;
 
 		pSimpleQty = getValueFromEditText(editPakopakoSimple);
 		pSauceQty  = getValueFromEditText(editPakopakoSauce);
 		skewerQty  = getValueFromEditText(editSkewer);
 		chickenQty = getValueFromEditText(editChicken);
+		otherAmount = getValueFromEditText(editOther);
 		juiceQty   = getValueFromEditText(editJuice);
-		fFriesQty  = getValueFromEditText(editFrenchFries);
 
-		 int multiplyQuantity = 0;
 		 String editQuantityValue = editQuantityFFries.getText().toString().trim();
 		 if(editQuantityValue.isEmpty()){
-			  multiplyQuantity= 1;
-		 }else {
+			  multiplyQuantity = 1;
+		 }
+		 else {
 			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
 		 }
 
-
-		if(fFriesQty == 0){
-			fFriesPrice = frenchFriesSelectedValue * multiplyQuantity;
-		}
-		else if (frenchFriesSelectedValue == 0) {
-			fFriesPrice = fFriesQty;
-		}
-		else {
-			fFriesPrice = fFriesQty + (frenchFriesSelectedValue * multiplyQuantity);
-		}
+		fFriesPrice = frenchFriesSelectedValue * multiplyQuantity;
 
 		NbrSimpleBonus = generateBonus(pSimpleQty);
 		NbrSauceBonus = generateBonus(pSauceQty);
@@ -204,7 +193,17 @@ public class AddNewCommandPage extends AppCompatActivity {
 		String value = "| pakopako:"+ pSimpleQty + " skewer:" + skewerQty + " chicken:" + chickenQty + " juice:" + juiceQty  + " simpleBonus: " + NbrSimpleBonus + " sauceBonus: "  + NbrSauceBonus ;
 
 		Log.d(Constants.TAG, value);
-		Command command = new Command(pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty,juiceBottlePrice, fFriesPrice, NbrSimpleBonus, NbrSauceBonus);
+		Command command = new Command(
+				  pSimpleQty,
+				  pSauceQty,
+				  skewerQty,
+				  chickenQty,
+				  juiceQty,
+				  juiceBottlePrice,
+				  fFriesPrice,
+				  otherAmount,
+				  NbrSimpleBonus,
+				  NbrSauceBonus);
 
 			try {
 				long newCommandInsert = localDataSource.addCommands(command);
@@ -216,7 +215,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 				}
 				else{
 					Log.d(Constants.TAG, Constants.ADD_FAILURE + newCommandInsert);
-
 				}
 			}
 			catch (Exception e) {
@@ -227,13 +225,13 @@ public class AddNewCommandPage extends AppCompatActivity {
 			}
 	}
 	private void cleanAllEditText(){
-		editFrenchFries.setVisibility(VISIBLE);
+		editOther.setVisibility(VISIBLE);
 		editPakopakoSimple.setText("");
 		editPakopakoSauce.setText("");
 		editSkewer.setText("");
 		editChicken.setText("");
 		editJuice.setText("");
-		editFrenchFries.setText("");
+		editOther.setText("");
 		editMoney.setText("");
 		editQuantityFFries.setText("");
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
@@ -246,7 +244,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editSkewer         = findViewById(R.id.editSkewer);
 		editChicken        = findViewById(R.id.editChicken);
 		editJuice          = findViewById(R.id.editJuice);
-		editFrenchFries    = findViewById(R.id.editPFrenchFries);
+		editOther          = findViewById(R.id.editOther);
 		editMoney          = findViewById(R.id.editMoney);
 		editQuantityFFries = findViewById(R.id.editQuantityFFries);
 
@@ -296,23 +294,25 @@ public class AddNewCommandPage extends AppCompatActivity {
 			@Override
 			public void afterTextChanged(Editable s) {}
 		};
-
 		AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
 
-				if(adapterView.getId() == R.id.spinner_juices) {
-
+				if (adapterView.getId() == R.id.spinner_juices) {
 
 					float juiceLiterSelected = Float.parseFloat(selectValue);
-					if (juiceLiterSelected ==1) {
+					if(juiceLiterSelected == 0) {
+						juiceBottlePrice = 0;
+					}
+
+					else if (juiceLiterSelected == 1) {
 						juiceBottlePrice = 3000;
 					}
 					else if (juiceLiterSelected == 1.5) {
 						juiceBottlePrice = 5000;
 					}
-					else if(juiceLiterSelected ==2){
+					else if (juiceLiterSelected == 2) {
 						juiceBottlePrice = 6000;
 					}
 				}
@@ -323,9 +323,11 @@ public class AddNewCommandPage extends AppCompatActivity {
 						return;
 					}
 
-					editFrenchFries.setVisibility(View.GONE);
+					editOther.setVisibility(View.GONE);
 					editQuantityFFries.setVisibility(View.VISIBLE);
-					editFrenchFries.setVisibility(GONE);
+					YoYo.with(Techniques.BounceInLeft).duration(1000).playOn(editQuantityFFries);
+					YoYo.with(Techniques.BounceInRight).duration(1000).playOn(spinner_frenchFries);
+					editOther.setVisibility(GONE);
 
 					frenchFriesSelectedValue = Integer.parseInt(selectValue);
 					editQuantityFFries.setVisibility(VISIBLE);
@@ -334,31 +336,29 @@ public class AddNewCommandPage extends AppCompatActivity {
 				displayProductQtyAndAmount();
 			}
 			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				editFrenchFries.setVisibility(View.VISIBLE);
-				editQuantityFFries.setVisibility(View.GONE);
-			}
+			public void onNothingSelected(AdapterView<?> parent) { }
 		};
+		componentListenerImp(watcher, spinnerListener);
+		displayProductQtyAndAmount();
 
+	}
+	private void componentListenerImp(TextWatcher watcher, AdapterView.OnItemSelectedListener spinnerListener){
 		editPakopakoSimple.addTextChangedListener(watcher);
 		editPakopakoSauce.addTextChangedListener(watcher);
 		editSkewer.addTextChangedListener(watcher);
 		editChicken.addTextChangedListener(watcher);
 		editJuice.addTextChangedListener(watcher);
-		editFrenchFries.addTextChangedListener(watcher);
+		editOther.addTextChangedListener(watcher);
 		editMoney.addTextChangedListener(watcher);
 		editQuantityFFries.addTextChangedListener(watcher);
 
 		spinner_juices.setOnItemSelectedListener(spinnerListener);
 		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
 
-		displayProductQtyAndAmount();
-
 	}
 	private void showAlertDialogExpense(){
 		AlertDialogCustomExpense dialog = new AlertDialogCustomExpense(this);
 
-		// Compteurs pour les boutons
 		final int[] counterPSimba = {0};
 		final int[] counterSSimba = {0};
 
@@ -426,8 +426,5 @@ public class AddNewCommandPage extends AppCompatActivity {
 		dialog.setCanceledOnTouchOutside(true);
 
 	}
-
-
-
 
 }

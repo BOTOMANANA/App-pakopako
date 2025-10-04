@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
+    android:backgroundTint="@color/white"
+    android:elevation="8dp"
     android:radius="20dp"
     app:cardCornerRadius="20dp"
-    android:elevation="8dp">
+    tools:ignore="TextSizeCheck">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:gravity="center">
-
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/alert_title"
@@ -25,54 +25,82 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:text="Title of message"
-            android:textSize="20sp"
+            android:text="Suppression des données"
             android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,TextContrastCheck" />
-
-        <TextView
-            android:id="@+id/alert_subTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:text="body of the message"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:alpha="0.6"
-            android:textSize="14sp"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:backgroundTint="@color/gray"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/tick_list"
+                    tools:ignore="ImageContrastCheck" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/alert_subTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:alpha="0.6"
+                android:text="Etes-vous sure de supprimer\n  vos tous les données"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10sp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/alert_cancel"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/whitegray"
-                android:text="Non, garder"
-                android:textSize="12sp"
+                android:text="Annuler"
                 android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
             <Button
                 android:id="@+id/alert_confirm"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="Oui, effacer"
-                android:textSize="12sp"
+                android:text="Effacer"
                 android:textColor="@color/white"
+                android:textSize="12sp"
                 tools:ignore="ButtonStyle,HardcodedText" />
 
         </LinearLayout>

@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SourceDatabase extends SQLiteOpenHelper {
 
-	public static final String DATABASE_NAME = "AntMobile11.db";
-	private static final int VERSION =10;
+	public static final String DATABASE_NAME = "AntMobile12.db";
+	private static final int VERSION = 11;
 	public static final String TABLE_COMMANDS_NAME = "commands";
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_NUMBER_PAKOPAKO_SIMPLE = "pakopakoSimple";
@@ -19,6 +19,7 @@ public class SourceDatabase extends SQLiteOpenHelper {
 	public static final String COLUMN_AMOUNT_FRENCH_FRIES = "french_fries";
 	public static final String COLUMN_NUMBER_PSIMPLE_BONUS = "psimple_bonus";
 	public static final String COLUMN_NUMBER_PSAUCE_BONUS = "psauce_bonus";
+	public static final String COLUMN_AMOUNT_OTHER = "other";
 
 	private static final String CREATE_TABLE_COMMANDS =
 			  "CREATE TABLE " + TABLE_COMMANDS_NAME + " (" +
@@ -26,11 +27,12 @@ public class SourceDatabase extends SQLiteOpenHelper {
 						 COLUMN_NUMBER_PAKOPAKO_SIMPLE + " INTEGER, " +
 						 COLUMN_NUMBER_PAKOPAKO_SAUCE + " INTEGER, " +
 						 COLUMN_NUMBER_SKEWER + " INTEGER, " +
-						 COLUMN_NUMBER_CHICKEN+ " INTEGER, " +
-						 COLUMN_NUMBER_JUICE+ " INTEGER," +
-						 COLUMN_JUICE_BOTTLE_PRICE+ " INTEGER," +
-						 COLUMN_AMOUNT_FRENCH_FRIES+ " INTEGER, " +
-						 COLUMN_NUMBER_PSIMPLE_BONUS+ " INTEGER, " +
+						 COLUMN_NUMBER_CHICKEN + " INTEGER, " +
+						 COLUMN_NUMBER_JUICE + " INTEGER," +
+						 COLUMN_JUICE_BOTTLE_PRICE + " INTEGER," +
+						 COLUMN_AMOUNT_FRENCH_FRIES + " INTEGER, " +
+						 COLUMN_AMOUNT_OTHER + " INTEGER, " +
+						 COLUMN_NUMBER_PSIMPLE_BONUS + " INTEGER, " +
 						 COLUMN_NUMBER_PSAUCE_BONUS + " INTEGER);";
 
 	public static final String TABLE_PRODUCT_SIMBA = "product_simba";

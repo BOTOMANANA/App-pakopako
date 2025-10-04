@@ -168,18 +168,16 @@
                 android:gravity="center">
 
                 <EditText
-                    android:id="@+id/editPFrenchFries"
-                    android:layout_width="140dp"
+                    android:id="@+id/editOther"
+                    android:layout_width="150dp"
                     android:layout_height="54dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/edit_text_border"
-                    android:drawableStart="@drawable/custom_icon_french_fries"
-                    android:drawablePadding="8dp"
-                    android:hint="P-frites"
+                    android:hint="Autres"
                     android:inputType="number|numberSigned"
                     android:maxLength="7"
                     android:visibility="visible"
-                    android:paddingStart="12sp"
+                    android:paddingStart="18sp"
                     android:textColor="@color/white"
                     android:textColorHint="@color/hintEditText"
                     tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
@@ -209,29 +207,25 @@
 
                 </LinearLayout>
 
-
                 <EditText
                     android:id="@+id/editQuantityFFries"
-                    android:layout_width="130dp"
+                    android:layout_width="150dp"
                     android:layout_height="54dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/edit_text_border"
                     android:importantForAutofill="no"
                     android:maxLength="3"
-                    android:drawablePadding="8dp"
                     android:textColor="@color/white"
                     android:hint="Quantite"
                     android:inputType="number"
                     android:textColorHint="@color/whitegray"
-                    android:paddingStart="10sp"
+                    android:paddingStart="20sp"
                     android:visibility="gone"
                     android:src="@drawable/plus_small"
                     tools:ignore="ContentDescription,HardcodedText,RtlSymmetry,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck" />
-
-
+                
             </LinearLayout>
-
 
             <EditText
                 android:id="@+id/editMoney"

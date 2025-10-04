@@ -30,7 +30,7 @@ import com.example.tutorialproject.utils.NumberFormated;
 
 public class ListAllCommandPage extends AppCompatActivity {
 	TextView getNbrPakopakoSimple,getNbrPakopakoSauce, getNbrPSimpleBonus, getNbrPSauceBonus, getNbrSkewer, getNbrChicken, getNbrJuice, getNbrSkewerSimba, getNbrPakopakoSimba;
-	TextView sumTotalAmountDaily, sumAmountPSimple, sumAmountPSauce, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountFrenchFries, sumAmountExpense;
+	TextView sumTotalAmountDaily, sumAmountPSimple, sumAmountPSauce, sumAmountSkewer, sumAmountChicken, sumAmountJuice, sumAmountJuiceBottle, sumAmountFrenchFries, sumAmountOther, sumAmountExpense;
 	LocalDataSourceImpl localDataSource;
 	LottieAnimationView animationView;
 	ImageButton btn_goBack;
@@ -54,7 +54,7 @@ public class ListAllCommandPage extends AppCompatActivity {
 
 			AlertDialogCustom dialogCustom = new AlertDialogCustom(this);
 			dialogCustom.setTitle("Suppression des données");
-			dialogCustom.setSubTitle("Est-vous sure de supprimer tous les données!");
+			dialogCustom.setSubTitle("Est-vous sure de supprimer\n tous vos données!");
 
 			dialogCustom.getBtn_cancel().setOnClickListener(view -> dialogCustom.dismiss());
 			dialogCustom.getBtn_confirm().setOnClickListener(view -> {
@@ -129,26 +129,33 @@ public class ListAllCommandPage extends AppCompatActivity {
 		amountFrenchFries   = NumberFormated.formatValue(getAmountFrenchFries);
 
 
-		sumAllMoneyDaily =( (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
+		sumAllMoneyDaily = (getSumNbrPSimple * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE) +
 				  (getSumNbrPSauce * Constants.PriceOfProduct.PAKOPAKO_SAUCE_PRICE) +
 				  (getSumNbrSkewer * Constants.PriceOfProduct.SKEWER_PRICE) +
 				  (getSumNbrChicken * Constants.PriceOfProduct.CHICKEN_PRICE) +
-				  (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE)) - localDataSource.getSumAmountExpanse();
+				  (getSumNbrJuice * Constants.PriceOfProduct.JUICE_PRICE) +
+				  localDataSource.getTotalPriceJuiceBottle() +
+				  localDataSource.getTotalAmountFrenchFries() +
+		         localDataSource.getTotalAmountOther();
+
+		long sumAmountDaily = sumAllMoneyDaily - localDataSource.getSumAmountExpanse();
 
 
-		if(sumAllMoneyDaily > 0) playAnimationLottie();
+		if(sumAmountDaily > 0) playAnimationLottie();
 
 		sumAmountPSimple.setText(amountPricePSimple);
 		sumAmountPSauce.setText(amountPricePSauce);
 		sumAmountSkewer.setText(amountPriceSkewer);
 		sumAmountChicken.setText(amountPriceChicken);
 		sumAmountJuice.setText(amountPriceJuice);
+		sumAmountJuiceBottle.setText(NumberFormated.formatValue(localDataSource.getTotalPriceJuiceBottle()));
 		sumAmountFrenchFries.setText(amountFrenchFries);
 		getNbrPakopakoSimba.setText(NumberFormated.formatValue(localDataSource.getTotalNumberPakopakoSimba()));
 		getNbrSkewerSimba.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewerSimba()));
+		sumAmountOther.setText(NumberFormated.formatValue(localDataSource.getTotalAmountOther()));
 		sumAmountExpense.setText(NumberFormated.formatValue(localDataSource.getSumAmountExpanse()));
 
-		CounterNumberAnimation.counterAnimate(sumTotalAmountDaily ,0 , (int) sumAllMoneyDaily,TIME_COUNTER );
+		CounterNumberAnimation.counterAnimate(sumTotalAmountDaily ,0 , (int) sumAmountDaily,TIME_COUNTER );
 
 	}
 	private void playAnimationLottie(){
@@ -179,7 +186,22 @@ public class ListAllCommandPage extends AppCompatActivity {
 		sumAmountSkewer      = findViewById(R.id.sumAmountSkewer);
 		sumAmountChicken     = findViewById(R.id.sumAmountChicken);
 		sumAmountJuice       = findViewById(R.id.sumAmountJuice);
+		sumAmountJuiceBottle = findViewById(R.id.sumAmountJuiceBottle);
+		sumAmountOther       = findViewById(R.id.sumAmountOther);
 		sumAmountExpense     = findViewById(R.id.sumAmountOutgo);
 	}
+
+
+//	private void displayProductQty(
+//			  TextView pSimpleQty,
+//			  TextView pSauceQty,
+//			  TextView pSimpleBonusQty,
+//			  TextView pSauceBonusQty,
+//			  TextView skewerQty,
+//			  TextView juiceQty,
+//			  TextView fFriesAmount){
+//
+//	}
+
 
 }
