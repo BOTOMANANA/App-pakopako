@@ -11,18 +11,18 @@
 
     <string-array name="JuiceType">
 
-        <item>0</item>
-        <item>1</item>
-        <item>1.5</item>
-        <item>2</item>
+        <item>Bouteille</item>
+        <item>1 Litre</item>
+        <item>1.5 Litres</item>
+        <item>2 Litres</item>
 
     </string-array>
 
     <string-array name="frenchFriesType">
-        <item>0</item>
-        <item>1500</item>
-        <item>2000</item>
-        <item>3000</item>
+        <item>P-frites</item>
+        <item>1500 ar</item>
+        <item>2000 ar</item>
+        <item>3000 ar</item>
     </string-array>
 
 

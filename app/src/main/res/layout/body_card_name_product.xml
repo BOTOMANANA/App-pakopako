@@ -1020,7 +1020,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="center"
-                    android:src="@drawable/baseline_other"
+                    android:src="@drawable/other_dots"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
             </LinearLayout>
@@ -1103,7 +1103,7 @@
                     android:layout_height="60dp"
                     android:scaleType="center"
                     android:src="@drawable/depense_icon"
-                    tools:ignore="ContentDescription,ImageContrastCheck" />
+                    tools:ignore="ContentDescription,ImageContrastCheck,TooManyViews" />
 
             </LinearLayout>
 

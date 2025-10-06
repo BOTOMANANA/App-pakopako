@@ -51,9 +51,13 @@ public class AddNewCommandPage extends AppCompatActivity {
 	private long backButtonTime;
 	LinearLayout header_widget;
 	int NbrSimpleBonus, NbrSauceBonus;
-	int juiceBottlePrice, frenchFriesSelectedValue, displayTotalFFries;
+	int juiceBottlePrice = 0;
 	private GestureDetector gestureDetector;
 	private boolean isFirstSelection = true;
+	private boolean ignoreSpinnerEvent = false;
+	int  lastSelectedFFriesValue = 0;
+	int totalFFries = 0;
+	int subtotal = 0;
 
 	@SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
 	@Override
@@ -64,19 +68,19 @@ public class AddNewCommandPage extends AppCompatActivity {
 		setupViews();
 		setupSpinnerAdapter(spinner_juices, R.array.JuiceType);
 		setupSpinnerAdapter(spinner_frenchFries, R.array.frenchFriesType);
-		editOther.setVisibility(View.VISIBLE);
 
 		localDataSource = new LocalDataSourceImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
 
-//		int multiplyQuantity = getValueFromEditText(editQuantityFFries);
-
 		componentListener();
 
 		btn_addData.setOnClickListener(v -> {
+			ignoreSpinnerEvent = true;
+			spinner_frenchFries.setSelection(0);
+
 			addCommandInDatabase();
 			cleanAllEditText();
-			editQuantityFFries.setVisibility(GONE);
+
 		});
 
 		btn_floating.setOnClickListener(v -> biometric.authenticate());
@@ -125,15 +129,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 	}
 	@SuppressLint("SetTextI18n")
 	private int calculateSumAmount() {
-		int multiplyQuantity ;
-		String editQuantityValue = editQuantityFFries.getText().toString().trim();
-		if(editQuantityValue.isEmpty()){
-			 multiplyQuantity= 1;
-		}else {
-			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
-		}
-		displayTotalFFries += frenchFriesSelectedValue * multiplyQuantity;
-
 
 		int sumAmountCommand = 0;
 		sumAmountCommand += getValueFromEditText(editPakopakoSimple) * Constants.PriceOfProduct.PAKOPAKO_SIMPLE_PRICE;
@@ -143,7 +138,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		sumAmountCommand += getValueFromEditText(editJuice)    * Constants.PriceOfProduct.JUICE_PRICE;
 		sumAmountCommand += getValueFromEditText(editOther);
 		sumAmountCommand += juiceBottlePrice;
-		sumAmountCommand += displayTotalFFries;
+		sumAmountCommand += totalFFries;
 		return sumAmountCommand;
 	}
 	@SuppressLint("SetTextI18n")
@@ -168,7 +163,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 	}
 	private void addCommandInDatabase(){
-		int pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty, fFriesPrice, otherAmount, multiplyQuantity;
+		int pSimpleQty, pSauceQty, skewerQty, chickenQty, juiceQty, otherAmount;
 
 		pSimpleQty = getValueFromEditText(editPakopakoSimple);
 		pSauceQty  = getValueFromEditText(editPakopakoSauce);
@@ -176,16 +171,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 		chickenQty = getValueFromEditText(editChicken);
 		otherAmount = getValueFromEditText(editOther);
 		juiceQty   = getValueFromEditText(editJuice);
-
-		 String editQuantityValue = editQuantityFFries.getText().toString().trim();
-		 if(editQuantityValue.isEmpty()){
-			  multiplyQuantity = 1;
-		 }
-		 else {
-			 multiplyQuantity = getValueFromEditText(editQuantityFFries);
-		 }
-
-		fFriesPrice = frenchFriesSelectedValue * multiplyQuantity;
 
 		NbrSimpleBonus = generateBonus(pSimpleQty);
 		NbrSauceBonus = generateBonus(pSauceQty);
@@ -200,7 +185,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 				  chickenQty,
 				  juiceQty,
 				  juiceBottlePrice,
-				  fFriesPrice,
+				  totalFFries,
 				  otherAmount,
 				  NbrSimpleBonus,
 				  NbrSauceBonus);
@@ -208,14 +193,11 @@ public class AddNewCommandPage extends AppCompatActivity {
 			try {
 				long newCommandInsert = localDataSource.addCommands(command);
 				Log.d(Constants.TAG ,"this is a value for bonus "+ command.getpSimpleBonus());
+				Log.d(Constants.TAG , Constants.ADD_SUCCESS + newCommandInsert + value);
 
-				if (newCommandInsert > 0) {
-					Log.d(Constants.TAG , Constants.ADD_SUCCESS + newCommandInsert + value);
-					ToastMessage.showToast(this, Constants.ADD_SUCCESS_TOAST);
-				}
-				else{
-					Log.d(Constants.TAG, Constants.ADD_FAILURE + newCommandInsert);
-				}
+				if (newCommandInsert > 0) ToastMessage.showToast(this, Constants.ADD_SUCCESS_TOAST);
+				else Log.d(Constants.TAG, Constants.ADD_FAILURE + newCommandInsert);
+
 			}
 			catch (Exception e) {
 				Log.d(Constants.TAG, Constants.ADD_ERROR_TOAST + e.getMessage());
@@ -225,6 +207,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 			}
 	}
 	private void cleanAllEditText(){
+		editQuantityFFries.setVisibility(GONE);
 		editOther.setVisibility(VISIBLE);
 		editPakopakoSimple.setText("");
 		editPakopakoSauce.setText("");
@@ -234,6 +217,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editOther.setText("");
 		editMoney.setText("");
 		editQuantityFFries.setText("");
+
 		YoYo.with(Techniques.Tada).duration(500).playOn(btn_addData);
 	}
 	void setupViews(){
@@ -265,7 +249,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		YoYo.with(Techniques.RotateIn).duration(1000).playOn(amount_command);
 		YoYo.with(Techniques.FadeIn).duration(5000).playOn(text_ariary);
 	}
-	private void setupSpinnerAdapter(Spinner spinner , int list_data ){
+	private void setupSpinnerAdapter(Spinner spinner, int list_data ){
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, list_data, R.layout.spinner_item_selected_color);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
@@ -297,40 +281,44 @@ public class AddNewCommandPage extends AppCompatActivity {
 		AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+				if(ignoreSpinnerEvent) {
+					ignoreSpinnerEvent = false;
+					return;
+				}
+
 				String selectValue = adapterView.getItemAtPosition(position).toString().trim();
 
 				if (adapterView.getId() == R.id.spinner_juices) {
 
-					float juiceLiterSelected = Float.parseFloat(selectValue);
-					if(juiceLiterSelected == 0) {
-						juiceBottlePrice = 0;
-					}
+					Log.d("DEBUG", selectValue);
+					if(selectValue.equals("Bouteille")) juiceBottlePrice = 0;
+					if(selectValue.equals("1 Litre")) juiceBottlePrice = 3000;
+					if(selectValue.equals("1.5 Litres")) juiceBottlePrice = 5000;
+					if(selectValue.equals("2 Litres")) juiceBottlePrice = 6000;
 
-					else if (juiceLiterSelected == 1) {
-						juiceBottlePrice = 3000;
-					}
-					else if (juiceLiterSelected == 1.5) {
-						juiceBottlePrice = 5000;
-					}
-					else if (juiceLiterSelected == 2) {
-						juiceBottlePrice = 6000;
-					}
 				}
-
 				else if (adapterView.getId() == R.id.spinner_frenchFries) {
-					if (isFirstSelection) {
-						isFirstSelection = false;
-						return;
+
+					if(selectValue.equals("P-frite")){
+						lastSelectedFFriesValue = 0;
+						editOther.setVisibility(VISIBLE);
+						editQuantityFFries.setVisibility(GONE);
+
 					}
+					if(selectValue.equals("1500 ar")) {
+						lastSelectedFFriesValue = 1500;
+						editOther.setVisibility(GONE);
+						editQuantityFFries.setVisibility(VISIBLE);
 
-					editOther.setVisibility(View.GONE);
-					editQuantityFFries.setVisibility(View.VISIBLE);
-					YoYo.with(Techniques.BounceInLeft).duration(1000).playOn(editQuantityFFries);
-					YoYo.with(Techniques.BounceInRight).duration(1000).playOn(spinner_frenchFries);
-					editOther.setVisibility(GONE);
+					};
 
-					frenchFriesSelectedValue = Integer.parseInt(selectValue);
-					editQuantityFFries.setVisibility(VISIBLE);
+					if(selectValue.equals("2000 ar")){
+						lastSelectedFFriesValue = 2000;
+						editOther.setVisibility(GONE);
+						editQuantityFFries.setVisibility(VISIBLE);
+					}
+					if(selectValue.equals("3000 ar")) lastSelectedFFriesValue = 3000;
 
 				}
 				displayProductQtyAndAmount();
@@ -338,6 +326,35 @@ public class AddNewCommandPage extends AppCompatActivity {
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) { }
 		};
+
+		editQuantityFFries.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			@Override
+			public void afterTextChanged(Editable s) {
+				String qtyText = s.toString().trim();
+
+				if (qtyText.isEmpty() || lastSelectedFFriesValue == 0) return;
+
+				int multiplyValue = Integer.parseInt(qtyText);
+
+				// On calcule uniquement la dernière sélection * quantité
+				 subtotal = lastSelectedFFriesValue * multiplyValue;
+
+				// On ajoute au total
+				totalFFries += subtotal;
+				displayProductQtyAndAmount();
+
+
+				Log.d("DEBUG", "Sous-total ajouté : " + subtotal);
+				Log.d("DEBUG", "Total frites actuel : " + totalFFries);
+
+			}
+		});
+
+
 		componentListenerImp(watcher, spinnerListener);
 		displayProductQtyAndAmount();
 
@@ -350,7 +367,6 @@ public class AddNewCommandPage extends AppCompatActivity {
 		editJuice.addTextChangedListener(watcher);
 		editOther.addTextChangedListener(watcher);
 		editMoney.addTextChangedListener(watcher);
-		editQuantityFFries.addTextChangedListener(watcher);
 
 		spinner_juices.setOnItemSelectedListener(spinnerListener);
 		spinner_frenchFries.setOnItemSelectedListener(spinnerListener);
@@ -379,6 +395,9 @@ public class AddNewCommandPage extends AppCompatActivity {
 
 		dialog.getBtnSSimbaCounter().setOnClickListener(v -> {
 			counterSSimba[0] ++;
+
+			long counter = localDataSource.getTotalNumberPakopakoSimba() + 1;  // think in the logic of my code
+
 			dialog.getEditNbrSSimba().setText(String.valueOf(counterSSimba[0]));
 			dialog.getDisplayNbrSSimba().setText(String.valueOf(counterSSimba[0]));
 
