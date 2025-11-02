@@ -20,7 +20,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,16 +35,16 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
 
                 <EditText
                     android:id="@+id/editPakopkoSimple"
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="158dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
                     android:drawablePadding="8dp"
@@ -58,9 +58,9 @@
 
                 <EditText
                     android:id="@+id/editPakopkoSauce"
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_width="158dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_pakopako"
                     android:drawablePadding="8dp"
@@ -74,12 +74,19 @@
 
             </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
             <!--            Skewer                -->
             <EditText
                 android:id="@+id/editSkewer"
-                android:layout_width="310dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="158dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_skewer"
                 android:drawablePadding="8dp"
@@ -94,9 +101,9 @@
             <!--            Chicken                -->
             <EditText
                 android:id="@+id/editChicken"
-                android:layout_width="310dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="158dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_chicken"
                 android:drawablePadding="8dp"
@@ -108,19 +115,23 @@
                 android:textColorHint="@color/hintEditText"
                 tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
+        </LinearLayout>
+
+
+
             <!--            Juice                -->
             <LinearLayout
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center">
 
                 <EditText
                     android:id="@+id/editJuice"
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="158dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/edit_text_border"
                     android:drawableStart="@drawable/custom_icon_juice"
                     android:drawablePadding="8dp"
@@ -133,9 +144,9 @@
                     tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_width="158dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="horizontal"
                     android:gravity="start|center"
                     android:background="@drawable/rounded_corners_background"
@@ -161,17 +172,17 @@
 
             <!--            French fries        -->
             <LinearLayout
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center">
 
                 <EditText
                     android:id="@+id/editOther"
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="120dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="Autres"
                     android:inputType="number|numberSigned"
@@ -183,55 +194,58 @@
                     tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
 
                 <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="horizontal"
                     android:gravity="start|center"
                     android:background="@drawable/rounded_corners_background"
                     tools:ignore="UselessLeaf">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/french_fries"
-                        android:layout_marginStart="12dp"
+                        android:layout_marginStart="8dp"
                         tools:ignore="ContentDescription" />
 
                     <Spinner
                         android:id="@+id/spinner_frenchFries"
-                        android:layout_width="105dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/spinner_effect_background"
                         tools:ignore="TouchTargetSizeCheck" />
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:alpha="0.5"
+                        android:background="@color/white"/>
+
+                    <EditText
+                        android:id="@+id/editQuantityFFries"
+                        android:layout_width="60dp"
+                        android:layout_height="48dp"
+                        android:paddingStart="18sp"
+                        android:hint="Qty"
+                        android:textColor="@color/white"
+                        android:importantForAutofill="no"
+                        android:textColorHint="@color/white"
+                        android:inputType="number|numberSigned"
+                        android:background="@android:color/transparent"
+                        tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
+
 
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/editQuantityFFries"
-                    android:layout_width="150dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@drawable/edit_text_border"
-                    android:importantForAutofill="no"
-                    android:maxLength="3"
-                    android:textColor="@color/white"
-                    android:hint="Quantite"
-                    android:inputType="number"
-                    android:textColorHint="@color/whitegray"
-                    android:paddingStart="20sp"
-                    android:visibility="gone"
-                    android:src="@drawable/plus_small"
-                    tools:ignore="ContentDescription,HardcodedText,RtlSymmetry,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck" />
-                
             </LinearLayout>
 
             <EditText
                 android:id="@+id/editMoney"
-                android:layout_width="310dp"
+                android:layout_width="330dp"
                 android:layout_height="54dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/edit_text_border"
                 android:drawableStart="@drawable/custom_icon_money"
                 android:drawablePadding="8dp"

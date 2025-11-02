@@ -1,48 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:gravity="center">
-
-    <Button
-        android:id="@+id/btn_addData"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/colorAccent"
-        android:letterSpacing="0.05"
-        android:text="ENREGISTRE"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/sold_card_corners_background"
-        android:gravity="center">
+        android:layout_marginTop="4dp"
+        android:background="@drawable/custom_button_save"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sack_dollar_focus"
-            android:paddingStart="14dp"
-            tools:ignore="ContentDescription,RtlSymmetry" />
+        <Button
+            android:id="@+id/btn_addData"
+            android:layout_width="280dp"
+            android:layout_height="54dp"
+            android:backgroundTint="@android:color/transparent"
+            android:letterSpacing="0.05"
+            android:text="Enregistre"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/sold_card_corners_background">
 
         <Button
             android:id="@+id/floatingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             android:text="Solde"
             android:textColor="@color/white"
             android:textSize="15sp"
             tools:ignore="HardcodedText,VisualLintBounds" />
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:layout_marginEnd="120dp"
+            android:src="@drawable/sack_dollar_focus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription,RtlSymmetry" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -8,13 +8,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 
 import com.example.tutorialproject.R;
 
 public class AlertDialogCustomExpense extends Dialog {
 	String title;
-	TextView displayNbrPSimba, displayNbrSSimba;
+	TextView displayNbrPakopakoSimba, displayNbrSkewerSimba;
 	ImageButton btnPSimbaCounter, btnSSimbaCounter;
 	Button btnRegister;
 	EditText editNbrPSimba, editNbrSSimba, editExpense;
@@ -24,8 +23,8 @@ public class AlertDialogCustomExpense extends Dialog {
 		super(context, R.style.RoundedCornerAlertDialog);
 		setContentView(R.layout.alert_dialog_custom_expense);
 		this.title = "Produits maratra";
-		this.displayNbrPSimba = findViewById(R.id.nbrPakopakoSimba);
-		this.displayNbrSSimba = findViewById(R.id.nbrSkewerSimba);
+		this.displayNbrPakopakoSimba = findViewById(R.id.nbrPakopakoSimba);
+		this.displayNbrSkewerSimba = findViewById(R.id.nbrSkewerSimba);
 		this.btnPSimbaCounter = findViewById(R.id.btnCounterPSimba);
 		this.btnSSimbaCounter = findViewById(R.id.btnCounterSkewerSimba);
 		this.btnRegister      = findViewById(R.id.btn_register_expense);
@@ -38,12 +37,12 @@ public class AlertDialogCustomExpense extends Dialog {
 		return title;
 	}
 
-	public TextView getDisplayNbrPSimba() {
-		return displayNbrPSimba;
+	public TextView getDisplayNbrPakopakoSimba() {
+		return displayNbrPakopakoSimba;
 	}
 
-	public TextView getDisplayNbrSSimba() {
-		return displayNbrSSimba;
+	public TextView getDisplayNbrSkewerSimba() {
+		return displayNbrSkewerSimba;
 	}
 
 	public ImageButton getBtnPSimbaCounter() {

@@ -4,7 +4,7 @@ import com.example.tutorialproject.models.Command;
 import com.example.tutorialproject.models.ProductSimba;
 
 public interface LocalDataSource {
-	long addCommands(Command commands);
+	void addCommands(Command commands);
 	long insertProductSimba(ProductSimba productSimba);
 	long getTotalNumberPakopakoSimple();
 	long getTotalNumberPakopakoSauce();

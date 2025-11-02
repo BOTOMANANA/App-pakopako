@@ -4,8 +4,15 @@ import android.util.Log;
 
 import com.example.tutorialproject.constants.Constants;
 
-public class DBException {
+public class LogException {
 	public static void logError(Exception e){
 		Log.d(Constants.TAG, "Error is here ==>> " + e.getMessage());
 	}
+
+	public static void logNumberFormatError(NumberFormatException e) {
+		Log.d(Constants.TAG_FORMAT , "Error is here" + Constants.FORMAT_EXCEPTION + e.getMessage());
+
+	}
+
+
 }

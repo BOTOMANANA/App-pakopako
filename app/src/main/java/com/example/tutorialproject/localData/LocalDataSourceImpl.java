@@ -23,49 +23,46 @@ public class LocalDataSourceImpl implements LocalDataSource {
 		ldb = new SourceDatabase(context);
 		this.context = context;
 	}
+
 	private void openDatabase(){ database = ldb.getWritableDatabase();}
 	public void closeDatabase(){ ldb.close();}
+
 	@Override
-	public long addCommands(Command commands) {
+	public void addCommands(Command commands) {
 		openDatabase();
-		ContentValues cv = new ContentValues();
-		cv.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SIMPLE , commands.getPakopako_simple_number());
-		cv.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SAUCE, commands.getPakopako_sauce_number());
-		cv.put(SourceDatabase.COLUMN_NUMBER_CHICKEN , commands.getChicken_number());
-		cv.put(SourceDatabase.COLUMN_NUMBER_SKEWER , commands.getSkewer_number());
-		cv.put(SourceDatabase.COLUMN_NUMBER_JUICE , commands.getJuice_number());
-		cv.put(SourceDatabase.COLUMN_JUICE_BOTTLE_PRICE , commands.getJuiceBottleLiter());
-		cv.put(SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES, commands.getFrench_fries_amount());
-		cv.put(SourceDatabase.COLUMN_AMOUNT_OTHER, commands.getOther_amount());
-		cv.put(SourceDatabase.COLUMN_NUMBER_PSIMPLE_BONUS, commands.getpSimpleBonus());
-		cv.put(SourceDatabase.COLUMN_NUMBER_PSAUCE_BONUS, commands.getpSauceBonus());
-		long newRowCommandId = database.insert(SourceDatabase.TABLE_COMMANDS_NAME ,null, cv);
+		ContentValues values = new ContentValues();
+		values.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SIMPLE , commands.getPakopako_simple_number());
+		values.put(SourceDatabase.COLUMN_NUMBER_PAKOPAKO_SAUCE, commands.getPakopako_sauce_number());
+		values.put(SourceDatabase.COLUMN_NUMBER_CHICKEN , commands.getChicken_number());
+		values.put(SourceDatabase.COLUMN_NUMBER_SKEWER , commands.getSkewer_number());
+		values.put(SourceDatabase.COLUMN_NUMBER_JUICE , commands.getJuice_number());
+		values.put(SourceDatabase.COLUMN_JUICE_BOTTLE_PRICE , commands.getJuiceBottleLiter());
+		values.put(SourceDatabase.COLUMN_AMOUNT_FRENCH_FRIES, commands.getFrench_fries_amount());
+		values.put(SourceDatabase.COLUMN_AMOUNT_OTHER, commands.getOther_amount());
+		values.put(SourceDatabase.COLUMN_NUMBER_PSIMPLE_BONUS, commands.getpSimpleBonus());
+		values.put(SourceDatabase.COLUMN_NUMBER_PSAUCE_BONUS, commands.getpSauceBonus());
+
+		long newRowCommandId = database.insert(SourceDatabase.TABLE_COMMANDS_NAME ,null, values);
 		closeDatabase();
-		if(newRowCommandId != -1){
-			Log.d(Constants.TAG, Constants.ADD_SUCCESS + newRowCommandId);
-		}
-		else {
-			Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newRowCommandId);
-		}
-		return newRowCommandId;
+
+		if (newRowCommandId != -1) Log.d(Constants.TAG, Constants.ADD_SUCCESS + newRowCommandId);
+		else Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newRowCommandId);
+
 	}
 
 	@Override
 	public long insertProductSimba(ProductSimba productSimba) {
 		openDatabase();
-		ContentValues cv = new ContentValues();
-		cv.put(SourceDatabase.COLUMN_PAKOPAKO_SIMBA, productSimba.getPakopakoSimba());
-		cv.put(SourceDatabase.COLUMN_SKEWER_SIMBA, productSimba.getSkewerSimba());
-		cv.put(SourceDatabase.COLUMN_EXPANSE, productSimba.getExpense());
-		long newProductSimba = database.insert(SourceDatabase.TABLE_PRODUCT_SIMBA, null, cv);
+		ContentValues values = new ContentValues();
+		values.put(SourceDatabase.COLUMN_PAKOPAKO_SIMBA, productSimba.getPakopakoSimba());
+		values.put(SourceDatabase.COLUMN_SKEWER_SIMBA, productSimba.getSkewerSimba());
+		values.put(SourceDatabase.COLUMN_EXPANSE, productSimba.getExpense());
+		long newProductSimba = database.insert(SourceDatabase.TABLE_PRODUCT_SIMBA, null, values);
 		closeDatabase();
-		if(newProductSimba != -1){
-			Log.d(Constants.TAG, Constants.ADD_SUCCESS + newProductSimba);
-		}
-		else{
-			Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newProductSimba);
 
-		}
+		if (newProductSimba != -1) Log.d(Constants.TAG, Constants.ADD_SUCCESS + newProductSimba);
+		else Log.d(Constants.TAG, Constants.ADD_FAILURE+ " Error to add data in the database =>>" + newProductSimba);
+
 		return newProductSimba;
 	}
 
@@ -134,14 +131,14 @@ public class LocalDataSourceImpl implements LocalDataSource {
 	public void deleteStoryCommand() {
 		openDatabase();
 
-		// THIS IS FOR CLEAR ALL THE ROW OF MY TABLE (ALL VALUE FOR COLUMN )
-		int deleteCommand = database.delete(SourceDatabase.TABLE_COMMANDS_NAME, null, null);
-		int deleteProductSimba = database.delete(SourceDatabase.TABLE_PRODUCT_SIMBA, null, null);
+		int clearTableCommand = database.delete(SourceDatabase.TABLE_COMMANDS_NAME, null, null);
+		int clearTableProduct = database.delete(SourceDatabase.TABLE_PRODUCT_SIMBA, null, null);
 
 		closeDatabase();
-		int isDelete = deleteCommand + deleteProductSimba;
-		if (isDelete > 0) {
-			Log.d(Constants.TAG, Constants.COMMAND_DELETE + isDelete);
+		int clearAllTable = clearTableCommand + clearTableProduct;
+
+		if (clearAllTable > 0) {
+			Log.d(Constants.TAG, Constants.COMMAND_DELETE + clearAllTable);
 			Toast.makeText(context, Constants.LOADING_DELETE_TOAST, Toast.LENGTH_SHORT).show();
 		}
 		else {
@@ -151,15 +148,14 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
 	}
 
-
 	@SuppressLint("Recycle")
 	private long calculateEitherNbrProduct(@NotNull String tableName, @NotNull String columnName){
-		long nbrProductDeliver = 0;
+		long sumNumberProductDeliver = 0;
 		openDatabase();
 		try (Cursor cursor = database.rawQuery("SELECT SUM(" + columnName + ") FROM " + tableName, null)) {
 
 			if (cursor.moveToFirst()) {
-				nbrProductDeliver = cursor.getLong(0);
+				sumNumberProductDeliver = cursor.getLong(0);
 			}
 
 		} catch (Exception e) {
@@ -168,10 +164,9 @@ public class LocalDataSourceImpl implements LocalDataSource {
 			closeDatabase();
 		}
 
-		return nbrProductDeliver;
+		return sumNumberProductDeliver;
 
 	}
-
 
 }
 
