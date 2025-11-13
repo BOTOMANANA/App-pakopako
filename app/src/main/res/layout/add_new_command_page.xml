@@ -117,8 +117,6 @@
 
         </LinearLayout>
 
-
-
             <!--            Juice                -->
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -197,16 +195,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="start|center"
                     android:background="@drawable/rounded_corners_background"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
                     tools:ignore="UselessLeaf">
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/french_fries"
                         android:layout_marginStart="8dp"
+                        android:src="@drawable/french_fries"
                         tools:ignore="ContentDescription" />
 
                     <Spinner
@@ -215,27 +213,27 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/spinner_effect_background"
                         tools:ignore="TouchTargetSizeCheck" />
+
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="4dp"
                         android:alpha="0.5"
-                        android:background="@color/white"/>
+                        android:background="@color/white" />
 
                     <EditText
                         android:id="@+id/editQuantityFFries"
                         android:layout_width="60dp"
                         android:layout_height="48dp"
-                        android:paddingStart="18sp"
-                        android:hint="Qty"
-                        android:textColor="@color/white"
-                        android:importantForAutofill="no"
-                        android:textColorHint="@color/white"
-                        android:inputType="number|numberSigned"
                         android:background="@android:color/transparent"
+                        android:hint="Qte"
+                        android:importantForAutofill="no"
+                        android:inputType="number|numberSigned"
+                        android:paddingStart="18sp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         tools:ignore="HardcodedText,RtlSymmetry,TextFields" />
-
 
                 </LinearLayout>
 

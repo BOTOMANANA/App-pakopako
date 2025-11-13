@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tutorialproject'
+    namespace 'com.example.application_pakopako'
     compileSdk 35
 
     defaultConfig {
