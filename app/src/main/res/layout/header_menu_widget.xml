@@ -1,160 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/header_widget"
-    android:layout_height="100dp">
+    android:layout_height="64dp">
 
-<!--    pakopako card here-->
     <LinearLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="14dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/colorSecondary"
+        android:id="@+id/header_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="10dp"
-        tools:ignore="MissingConstraints,UselessParent">
+        android:scrollbars="horizontal"
+        android:scrollbarAlwaysDrawHorizontalTrack="true">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15sp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/pakopako"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
+        <!--    pakopako card here-->
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="14dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/colorSecondary"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            tools:ignore="MissingConstraints,UselessParent">
 
-        <TextView
-            android:id="@+id/nbrPakopako"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,TextContrastCheck" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/pakopako"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
 
+            <TextView
+                android:id="@+id/nbrPakopako"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/numberPakopakoSell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+        <!--    skewer card here-->
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/colorbutton"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            tools:ignore="MissingConstraints,UselessParent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/skewer"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/nbrSkewer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/numberSkewerSell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+        <!-- chicken card here-->
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/colorbutton"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            tools:ignore="MissingConstraints,UselessParent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/chicken"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/nbrChicken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/numberKitchenSell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+        <!--    juice card here-->
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/colorbutton"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            tools:ignore="MissingConstraints,UselessParent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/juice"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/nbrJuice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text=""
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
+
+        <!--    French fries card here-->
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/colorbutton"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints,UselessParent,TextSizeCheck">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15sp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/french_fries"
+                tools:ignore="ContentDescription,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/frenchFriesPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text=""
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+        </LinearLayout>
     </LinearLayout>
 
-<!--    skewer card here-->
-    <LinearLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/colorbutton"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="10dp"
-        tools:ignore="MissingConstraints,UselessParent">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15sp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/skewer"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
 
-        <TextView
-            android:id="@+id/nbrSkewer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-
-    </LinearLayout>
-
-<!-- chicken card here-->
-    <LinearLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/colorbutton"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="10dp"
-        tools:ignore="MissingConstraints,UselessParent">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15sp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/chicken"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
-
-        <TextView
-            android:id="@+id/nbrChicken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-
-    </LinearLayout>
-
-    <!--    juice card here-->
-    <LinearLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/colorbutton"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:elevation="10dp"
-        tools:ignore="MissingConstraints,UselessParent">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15sp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/juice"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
-
-        <TextView
-            android:id="@+id/nbrJuice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-
-    </LinearLayout>
-
-    <!--    French fries card here-->
-    <LinearLayout
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_background"
-        android:backgroundTint="@color/colorbutton"
-        android:elevation="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints,UselessParent,TextSizeCheck">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15sp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/french_fries"
-            tools:ignore="ContentDescription,ImageContrastCheck" />
-
-        <TextView
-            android:id="@+id/frenchFriesPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textColor="@color/white"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText,TextContrastCheck" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SourceDatabase extends SQLiteOpenHelper {
 
-	public static final String DATABASE_NAME = "AntMobile12.db";
-	private static final int VERSION = 11;
+	public static final String DATABASE_NAME = "AntMobile13.db";
+	private static final int VERSION = 12;
 	public static final String TABLE_COMMANDS_NAME = "commands";
 	public static final String COLUMN_ID = "id";
 	public static final String COLUMN_NUMBER_PAKOPAKO_SIMPLE = "pakopakoSimple";
@@ -48,6 +48,24 @@ public class SourceDatabase extends SQLiteOpenHelper {
 						 COLUMN_SKEWER_SIMBA + " INTEGER, " +
 						 COLUMN_EXPANSE + " INTEGER);";
 
+
+	public static final String TABLE_SELL_PRODUCT = "sell_product";
+	public static final String COLUMN_ID_SELL_PRODUCT = "id";
+	public static final String COLUMN_PAKOPAKO_COUNT = "pakopako_count";
+	public static final String COLUMN_SKEWER_COUNT = "skewer_count";
+	public static final String COLUMN_KITCHEN_COUNT = "kitchen_count";
+	public static final String COLUMN_JUICES_COUNT = "juices_count";
+
+
+	private static final String CREATE_TABlE_SELL_PRODUCT =
+			  "CREATE TABLE " + TABLE_SELL_PRODUCT + "(" +
+						 COLUMN_ID_SELL_PRODUCT + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+						 COLUMN_PAKOPAKO_COUNT + " INTEGER, " +
+						 COLUMN_SKEWER_COUNT + " INTEGER, " +
+						 COLUMN_KITCHEN_COUNT + " INTEGER," +
+						 COLUMN_JUICES_COUNT + " INTEGER);";
+
+
 	public SourceDatabase(Context context) {
 		super(context, DATABASE_NAME, null, VERSION);
 	}
@@ -56,12 +74,11 @@ public class SourceDatabase extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_TABLE_COMMANDS);
 		db.execSQL(CREATE_TABlE_PRODUCT_SIMBA);
-
+		db.execSQL(CREATE_TABlE_SELL_PRODUCT);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
 		db.execSQL(" DROP TABLE IF EXISTS " + TABLE_COMMANDS_NAME);
 		onCreate(db);
 

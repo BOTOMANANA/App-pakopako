@@ -28,7 +28,7 @@ public class commandRepository {
 			  int otherAmount) {
 
 		int numberPakopakoSimpleBonus = BonusCalculator.calculateBonus(pSimpleQuantity);
-		int numberPakopakoSauceBonus = BonusCalculator.calculateBonus(pSauceQuantity);
+		int numberPakopakoSauceBonus = BonusCalculator.calculateBonusSauce(pSauceQuantity);
 
 		Command command = new Command(
 				  pSimpleQuantity,

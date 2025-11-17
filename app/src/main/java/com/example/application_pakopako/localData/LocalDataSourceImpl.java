@@ -133,9 +133,10 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
 		int clearTableCommand = database.delete(SourceDatabase.TABLE_COMMANDS_NAME, null, null);
 		int clearTableProduct = database.delete(SourceDatabase.TABLE_PRODUCT_SIMBA, null, null);
+		int clearTableProductSell = database.delete(SourceDatabase.TABLE_SELL_PRODUCT, null, null);
 
 		closeDatabase();
-		int clearAllTable = clearTableCommand + clearTableProduct;
+		int clearAllTable = clearTableCommand + clearTableProduct + clearTableProductSell;
 
 		if (clearAllTable > 0) {
 			Log.d(Constants.TAG, Constants.COMMAND_DELETE + clearAllTable);

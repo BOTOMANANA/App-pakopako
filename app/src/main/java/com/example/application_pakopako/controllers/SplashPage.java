@@ -30,11 +30,10 @@ public class SplashPage extends AppCompatActivity {
 		btn_getStarted.setOnClickListener(v -> {
 			YoYo.with(Techniques.Wave).duration(1000).playOn(btn_getStarted);
 			new Handler().postDelayed(() -> {
-				startActivity(new Intent(this, AddNewCommandPage.class));
+				startActivity(new Intent(this, SellProductPage.class));
 
 			}, 900);
 		});
-
 
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
 			Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

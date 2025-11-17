@@ -11,7 +11,10 @@ import com.example.application_pakopako.utils.AlertDialogCustomExpense;
 import com.example.application_pakopako.utils.ToastMessage;
 
 public class ExpenseDialog {
-	public static void showAddExpenseDialog(Context context, LocalDataSourceImpl dataSource) {
+	public static void showAddExpenseDialog(
+			  Context context,
+			  LocalDataSourceImpl dataSource,
+			  Runnable onRefreshAction) {
 
 		AlertDialogCustomExpense dialog = new AlertDialogCustomExpense(context);
 
@@ -35,6 +38,8 @@ public class ExpenseDialog {
 			counterSkewerSimba[0] ++;
 			dialog.getEditNbrSSimba().setText(String.valueOf(counterSkewerSimba[0]));
 			dialog.getDisplayNbrSkewerSimba().setText(String.valueOf(counterSkewerSimba[0]));
+
+
 		});
 
 		dialog.getBtnRegister().setOnClickListener(v -> {
@@ -64,16 +69,21 @@ public class ExpenseDialog {
 
 			if (insertWithSuccess != -1) {
 				dialog.getDisplayNbrPakopakoSimba().setText(numberPakopakoSimba);
-				dialog.getDisplayNbrSkewerSimba().setText(numberSkewerSimba);
+				dialog.getDisplayNbrSkewerSimba().setText((numberSkewerSimba));
+				dataSource.getTotalNumberPakopakoSimba();
+
+
 				ToastMessage.showToast(context, "Enregistrement avec success");
 				Log.d(Constants.TAG, "Enregistrement avec success" + insertWithSuccess);
 
+				if(onRefreshAction != null) {
+					onRefreshAction.run();
+				}
 			}
 			else {
 				Log.d(Constants.TAG, "Enregistrement avec Erreur" + insertWithSuccess);
 			}
 			new Handler().postDelayed(dialog::dismiss,800);
-
 		});
 		dialog.show();
 		dialog.setCanceledOnTouchOutside(true);

@@ -29,6 +29,7 @@ import com.example.application_pakopako.R;
 import com.example.application_pakopako.constants.Constants;
 import com.example.application_pakopako.error.LogException;
 import com.example.application_pakopako.localData.LocalDataSourceImpl;
+import com.example.application_pakopako.localData.LocalDataSourceSellProductImpl;
 import com.example.application_pakopako.utils.BiometricAuthenticator;
 import com.example.application_pakopako.utils.NumberFormated;
 
@@ -38,7 +39,9 @@ public class AddNewCommandPage extends AppCompatActivity {
 	EditText editPakopakoSimple, editPakopakoSauce, editSkewer, editChicken, editJuice, editOther, editMoney, editQuantityFFries;
 	Spinner spinnerFrenchFries, spinnerJuicesBottle;
 	LocalDataSourceImpl localDataSource;
+	LocalDataSourceSellProductImpl sourceSellProduct;
 	TextView ariaryText, amountCommand,clientBalance, numberPakopako, numberSkewer, numberChicken, numberJuice, amountFrenchFries;
+	TextView numberPakopakoSell, numberSkewerSell, numberKitchenSell;
 	Button buttonAddData, buttonShowFingerPrint;
 	private long backButtonTime;
 	LinearLayout headerWidget;
@@ -55,6 +58,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		setContentView(R.layout.add_new_command_page);
 		setupViews();
 		localDataSource = new LocalDataSourceImpl(this);
+		sourceSellProduct = new LocalDataSourceSellProductImpl(this);
 		BiometricAuthenticator biometric = new BiometricAuthenticator(this);
 
 		setupSpinnerAdapter(spinnerJuicesBottle, R.array.JuiceType);
@@ -71,7 +75,7 @@ public class AddNewCommandPage extends AppCompatActivity {
 		gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 			@Override
 			public void onLongPress(@NotNull MotionEvent event) {
-				ExpenseDialog.showAddExpenseDialog(AddNewCommandPage.this, localDataSource);
+				ExpenseDialog.showAddExpenseDialog(AddNewCommandPage.this, localDataSource, AddNewCommandPage.this::displayProductQtyAndAmount);
 
 			}
 		});
@@ -93,6 +97,12 @@ public class AddNewCommandPage extends AppCompatActivity {
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 			return insets;
 		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		displayProductQtyAndAmount();
 	}
 
 	private int getValueFromEditText(EditText userInput){
@@ -132,6 +142,9 @@ public class AddNewCommandPage extends AppCompatActivity {
 		buttonAddData = findViewById(R.id.btn_addData);
 		headerWidget = findViewById(R.id.header_widget);
 		ariaryText = findViewById(R.id.text_ariary);
+		numberPakopakoSell = findViewById(R.id.numberPakopakoSell);
+		numberSkewerSell  = findViewById(R.id.numberSkewerSell);
+		numberKitchenSell = findViewById(R.id.numberKitchenSell);
 		animateHeaderViews();
 	}
 	private void animateHeaderViews() {
@@ -266,15 +279,29 @@ public class AddNewCommandPage extends AppCompatActivity {
 		int sumAmount = calculateSumAmount();
 		int changeAmount = clientAmount - sumAmount;
 
-		numberPakopako.setText(NumberFormated.formatValue(
-				  localDataSource.getTotalNumberPakopakoSimple()
-					 + localDataSource.getTotalNumberPakopakoSauce())
-		);
+		long totalPakopakoSimba = localDataSource.getTotalNumberPakopakoSimba();
+		long totalPakopakoBonus = localDataSource.getTotalNbrPSauceBonus() + localDataSource.getTotalNbrPSimpleBonus();
+		long totalFreePakopako = totalPakopakoSimba + totalPakopakoBonus;
+		long totalSkewerSimba = localDataSource.getTotalNumberSkewerSimba();
+		long totalFreeSkewer = totalSkewerSimba + localDataSource.getTotalNumberSkewer();
+
+
+
+		long totalPakopakoSold = localDataSource.getTotalNumberPakopakoSimple() + localDataSource.getTotalNumberPakopakoSauce();
+		long remainingPakopakoStock = sourceSellProduct.getPakopakoCount() - (totalPakopakoSold + totalFreePakopako) ;
+		long remainingSkewerStock = sourceSellProduct.getSkewerCount() - totalFreeSkewer;
+		long remainingKitchenStock = sourceSellProduct.getKitchenCount() - localDataSource.getTotalNumberChicken();
+
+		numberPakopako.setText(NumberFormated.formatValue(totalPakopakoSold));
 		numberSkewer.setText(NumberFormated.formatValue(localDataSource.getTotalNumberSkewer()));
 		numberChicken.setText(NumberFormated.formatValue(localDataSource.getTotalNumberChicken()));
 		numberJuice.setText(NumberFormated.formatValue(localDataSource.getTotalNumberJuice()));
 		amountFrenchFries.setText(NumberFormated.formatValue(localDataSource.getTotalAmountFrenchFries()));
+
 		amountCommand.setText(NumberFormated.formatValue(sumAmount));
+		numberPakopakoSell.setText(NumberFormated.formatValue(remainingPakopakoStock));
+		numberSkewerSell.setText(NumberFormated.formatValue(remainingSkewerStock));
+		numberKitchenSell.setText(NumberFormated.formatValue(remainingKitchenStock));
 
 		if (clientAmount < sumAmount || changeAmount < 0) {
 			clientBalance.setText(NumberFormated.formatValue(-clientAmount));

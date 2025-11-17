@@ -9,22 +9,33 @@
     tools:context=".controllers.SellProductPage">
 
     <LinearLayout
+        android:id="@+id/linearAnimate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="600dp"
+        android:background="@drawable/rounded_bottom_right_and_left"
+        android:elevation="50dp"
         android:gravity="center"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UselessLeaf">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="34dp"
+            android:text="@string/phrase_du_jour"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            tools:ignore="TextContrastCheck" />
+
         <EditText
             android:id="@+id/editNumberPakopako"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="54dp"
-            android:layout_marginTop="24dp"
             android:background="@drawable/edit_text_border"
             android:drawablePadding="8dp"
             android:hint="Nombres pakopako"
@@ -37,7 +48,7 @@
 
         <EditText
             android:id="@+id/editNumberSkewer"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="54dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/edit_text_border"
@@ -52,27 +63,12 @@
 
         <EditText
             android:id="@+id/editNumberKitchen"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="54dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/edit_text_border"
             android:drawablePadding="8dp"
             android:hint="Nombres poulets"
-            android:inputType="number|numberSigned"
-            android:maxLength="5"
-            android:paddingStart="12sp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/hintEditText"
-            tools:ignore="Autofill,HardcodedText,RtlSymmetry" />
-
-        <EditText
-            android:id="@+id/editNumberJuice"
-            android:layout_width="330dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/edit_text_border"
-            android:drawablePadding="8dp"
-            android:hint="Nombres juis"
             android:inputType="number|numberSigned"
             android:maxLength="5"
             android:paddingStart="12sp"
@@ -90,7 +86,7 @@
 
             <Button
                 android:id="@+id/buttonRegisterSellProduct"
-                android:layout_width="280dp"
+                android:layout_width="260dp"
                 android:layout_height="54dp"
                 android:backgroundTint="@android:color/transparent"
                 android:letterSpacing="0.05"
@@ -101,6 +97,19 @@
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonNextSellProduct"
+            android:layout_width="260dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@android:color/transparent"
+            android:letterSpacing="0.05"
+            android:text="Suivant"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
+
 
     </LinearLayout>
 
